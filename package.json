@@ -1,0 +1,36 @@
+{
+  "name": "project-sekai",
+  "version": "1.0.0",
+  "description": "Project Sekai's gameplay in HTML+SCSS+TS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BMoszczynski07/Project-Sekai.git"
+  },
+  "keywords": [
+    "project",
+    "sekai",
+    "sega",
+    "colorful",
+    "palette",
+    "hatsune",
+    "miku",
+    "vocaloid",
+    "vocaloids",
+    "japanese",
+    "japan"
+  ],
+  "author": "Bartosz Moszczynski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BMoszczynski07/Project-Sekai/issues"
+  },
+  "homepage": "https://github.com/BMoszczynski07/Project-Sekai#readme",
+  "devDependencies": {
+    "node-sass": "^9.0.0",
+    "typescript": "^5.1.6"
+  }
+}
