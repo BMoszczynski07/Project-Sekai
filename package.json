@@ -1,10 +1,12 @@
 {
   "name": "project-sekai",
   "version": "1.0.0",
-  "description": "Project Sekai's gameplay in HTML+SCSS+TS",
+  "description": "project sekai gameplay recreated in typescript as an web application",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -13,24 +15,36 @@
   "keywords": [
     "project",
     "sekai",
-    "sega",
-    "colorful",
-    "palette",
+    "vocaloids",
     "hatsune",
     "miku",
-    "vocaloid",
-    "vocaloids",
-    "japanese",
-    "japan"
+    "emu",
+    "otori",
+    "j-pop",
+    "songs"
   ],
-  "author": "Bartosz Moszczynski",
+  "author": "Bartosz Moszczyński",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/BMoszczynski07/Project-Sekai/issues"
   },
   "homepage": "https://github.com/BMoszczynski07/Project-Sekai#readme",
   "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "babel-loader": "^9.1.3",
+    "browsersync": "^0.0.1-security",
+    "css-loader": "^6.8.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
     "node-sass": "^9.0.0",
-    "typescript": "^5.1.6"
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

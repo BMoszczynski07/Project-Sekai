@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "outDir": "./dist",
-      "rootDir": "./src",
+      "target": "ES6",
+      "module": "ESNext",
+      "outDir": "./dist/js",
       "strict": true
     },
     "include": [
-      "src/**/*.ts"
-    ]
-}
+      "./src/scripts/**/*.ts"
+, "./main.ts"    
+]
+  }
   
