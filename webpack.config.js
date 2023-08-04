@@ -31,15 +31,10 @@ export default {
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[hash].[ext]", // Nazwa pliku z haszem
-              outputPath: "assets", // Katalog docelowy dla obrazków
-            },
-          },
-        ],
+        loader: "file-loader",
+        options: {
+          name: "assets/[name].[ext]",
+        },
       },
     ],
   },
@@ -59,7 +54,7 @@ export default {
       directory: path.join(__dirname, "dist"),
     },
     compress: true,
-    port: 4200,
+    port: 3000,
     hot: true,
   },
 };
