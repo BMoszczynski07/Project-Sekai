@@ -30,10 +30,19 @@ export default {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif|svg|ico)$/,
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
         loader: "file-loader",
+        include: path.resolve(__dirname, "src", "assets"),
         options: {
-          name: "assets/[name].[ext]",
+          name: "[name].[ext]",
+          outputPath: "assets",
+        },
+      },
+      {
+        test: /\.(ttf|otf)$/,
+        type: "asset/resource", // Użyj asset/resource dla plików fontów
+        generator: {
+          filename: "assets/[name].[hash].[ext]", // Ścieżka docelowa dla fontów
         },
       },
     ],

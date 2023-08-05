@@ -1,6 +1,9 @@
+@import "./global.scss";
+@import "./start.scss";
+
 body {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box;
-  background: #f00;
+  // overflow: hidden;
 }

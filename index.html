@@ -3,11 +3,204 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
     <title>Project Sekai</title>
   </head>
   <body>
-    <h1>Hello!</h1>
+    <main class="start">
+      <div class="start__background-overlay">
+        <img src="./assets/main-bg.jpg" class="start__background-image" />
+      </div>
 
-    <img src="/assets/Hatsune_Miku.png" />
+      <header class="start__title">Project Sekai</header>
+
+      <div class="start__sections">
+        <section class="start__section start__section-vocaloids">
+          <header class="start__vocaloids">Pick your singer</header>
+
+          <ul class="start__vocaloids-list">
+            <li class="start__vocaloid">
+              <div class="start__vocaloid-profile">
+                <img
+                  src="./assets/Hatsune_Miku_pfp.png"
+                  class="start__vocaloid-pfp"
+                />
+              </div>
+              <div class="start__vocaloid-info">
+                <h1 class="start__vocaloid-name">Hatsune Miku</h1>
+                <p class="start__vocaloid-desc">
+                  Hatsune Miku (Japanese : 初音ミク) is a Japanese virtual
+                  singer created by Crypton Future Media
+                </p>
+                <ul class="start__vocaloid-badges">
+                  <li class="start__vocaloid-badge start__badge--orange">
+                    Age 16
+                  </li>
+                  <li class="start__vocaloid-badge start__badge--blue">
+                    Release 2007
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="start__vocaloid">
+              <div class="start__vocaloid-profile">
+                <img src="./assets/Emu_pfp.png" class="start__vocaloid-pfp" />
+              </div>
+              <div class="start__vocaloid-info">
+                <h1 class="start__vocaloid-name">Emu Otori</h1>
+                <p class="start__vocaloid-desc">
+                  Otori Emu (鳳えむ) is a first-year student at Miyamasuzaka
+                  Girls Academy.
+                </p>
+                <ul class="start__vocaloid-badges">
+                  <li class="start__vocaloid-badge start__badge--purple">
+                    Height 152cm
+                  </li>
+                  <li class="start__vocaloid-badge start__badge--orange">
+                    Age 16
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="start__section start__section-songs">
+          <header class="start__songs">Pick a song</header>
+
+          <div class="start__songs-list-container">
+            <i class="fa-solid fa-arrow-up start__songs-list__arrow"></i>
+            <ul class="start__songs-list">
+              <li class="start__song">
+                <div class="start__song-pic">
+                  <img
+                    src="./assets/ready_steady_song.jpg"
+                    class="start__song-img"
+                  />
+                </div>
+
+                <div class="start__song-about">
+                  <h1 class="start__song-title">Ready Steady</h1>
+                  <div class="start__song-authors__container">
+                    <p class="start__song-authors">
+                      Hatsune Miku, Kagamine Rin, Kagamine Len
+                    </p>
+                  </div>
+                  <h5 class="start__song-info">
+                    Release Date: 07/07/2021 &bull; Music: GigaP
+                  </h5>
+                </div>
+
+                <div class="start__song-level__overlay">
+                  <h5 class="start__song-lvl">lvl</h5>
+                  <p class="start__song-level">28</p>
+                </div>
+              </li>
+              <li class="start__song start__song--selected">
+                <div class="start__song-pic">
+                  <img
+                    src="./assets/ready_steady_song.jpg"
+                    class="start__song-img"
+                  />
+                </div>
+
+                <div class="start__song-about">
+                  <h1 class="start__song-title">Ready Steady</h1>
+                  <div class="start__song-authors__container">
+                    <p
+                      class="start__song-authors start__song-authors--slide-animation"
+                    >
+                      Hatsune Miku, Kagamine Rin, Kagamine Len
+                    </p>
+                  </div>
+                  <h5 class="start__song-info">
+                    Release Date: 07/07/2021 &bull; Music: GigaP
+                  </h5>
+                </div>
+
+                <div class="start__song-level__overlay">
+                  <h5 class="start__song-lvl">lvl</h5>
+                  <p class="start__song-level">28</p>
+                </div>
+              </li>
+              <li class="start__song">
+                <div class="start__song-pic">
+                  <img
+                    src="./assets/ready_steady_song.jpg"
+                    class="start__song-img"
+                  />
+                </div>
+
+                <div class="start__song-about">
+                  <h1 class="start__song-title">Ready Steady</h1>
+                  <div class="start__song-authors__container">
+                    <p class="start__song-authors">
+                      Hatsune Miku, Kagamine Rin, Kagamine Len
+                    </p>
+                  </div>
+                  <h5 class="start__song-info">
+                    Release Date: 07/07/2021 &bull; Music: GigaP
+                  </h5>
+                </div>
+
+                <div class="start__song-level__overlay">
+                  <h5 class="start__song-lvl">lvl</h5>
+                  <p class="start__song-level">28</p>
+                </div>
+              </li>
+            </ul>
+            <i
+              class="fa-solid fa-arrow-up start__songs-list__arrow"
+              style="transform: rotate(180deg)"
+            ></i>
+          </div>
+
+          <form class="start__search-form">
+            <div class="start__search">
+              <button class="start__search__btn">
+                <i class="fa-solid fa-magnifying-glass start__search-i"></i>
+              </button>
+              <input type="search" class="start__search-input" />
+            </div>
+
+            <button class="start__search-filter__btn">
+              <i class="fa-solid fa-filter start__search-filter__i"></i>
+            </button>
+          </form>
+        </section>
+
+        <section class="start__section start__section-song">
+          <div class="start__img-overlay">
+            <img src="" alt="" />
+
+            <h1 class="start__song-header">Ready Steady</h1>
+            <div class="start__song-authors__overlay">
+              <h5 class="start__song-authors">
+                Hatsune Miku, Kagamine Rin, Kagamine Len
+              </h5>
+            </div>
+
+            <div class="start__song-btns">
+              <button class="start__song-btn">Select</button
+              ><button class="start__song-btn">Random</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <ul class="start__difficulty">
+        <li class="start__lvl">Easy</li>
+        <li class="start__lvl">Normal</li>
+        <li class="start__lvl">Hard</li>
+        <li class="start__lvl">Expert</li>
+        <li class="start__lvl">Master</li>
+        <li class="start__lvl">Auto</li>
+      </ul>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/f4c4b4acfc.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
