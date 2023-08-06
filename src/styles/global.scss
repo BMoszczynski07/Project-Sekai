@@ -11,6 +11,32 @@ $big: 27px;
 $medium: 23px;
 $small: 19px;
 
+@mixin scroll(
+  $width: 2px,
+  $trackbg: #c2c2c2,
+  $thumbbg: #303030,
+  $thumbhoverbg: #555
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $trackbg;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $thumbbg;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $thumbhoverbg;
+  }
+}
+
 @mixin default_scroll {
   &::-webkit-scrollbar {
     width: 2px;

@@ -157,33 +157,56 @@
 
           <form class="start__search-form">
             <div class="start__search">
-              <button class="start__search__btn">
+              <button class="start__search__btn" type="button">
                 <i class="fa-solid fa-magnifying-glass start__search-i"></i>
               </button>
-              <input type="search" class="start__search-input" />
+              <input
+                type="search"
+                placeholder='"Miku" Anamanaguchi'
+                class="start__search-input"
+              />
             </div>
 
-            <button class="start__search-filter__btn">
+            <button class="start__search-filter__btn" type="button">
               <i class="fa-solid fa-filter start__search-filter__i"></i>
             </button>
           </form>
         </section>
 
         <section class="start__section start__section-song">
-          <div class="start__img-overlay">
-            <img src="" alt="" />
+          <div class="start__song-img__overlay">
+            <img
+              src="./assets/ready_steady_song.jpg"
+              class="start__selected-song__img"
+            />
+          </div>
 
-            <h1 class="start__song-header">Ready Steady</h1>
-            <div class="start__song-authors__overlay">
-              <h5 class="start__song-authors">
-                Hatsune Miku, Kagamine Rin, Kagamine Len
-              </h5>
-            </div>
+          <h1 class="start__song-header">Ready Steady</h1>
+          <h5 class="start__selected-song__authors">
+            Hatsune Miku, Kagamine Rin, Kagamine Len
+          </h5>
 
-            <div class="start__song-btns">
-              <button class="start__song-btn">Select</button
-              ><button class="start__song-btn">Random</button>
+          <div class="start__song-badges">
+            <div class="start__song-badge">
+              <i class="fa-brands fa-itunes-note"></i>
+              <h5 class="start__song-badge__desc">07/07/2021</h5>
             </div>
+            <div class="start__song-badge">
+              <i class="fa-brands fa-itunes-note"></i>
+              <h5 class="start__song-badge__desc">GigaP</h5>
+            </div>
+            <div class="start__song-badge">
+              <i class="fa-solid fa-a"></i>
+              <h5 class="start__song-badge__desc">q*Left</h5>
+            </div>
+          </div>
+
+          <div class="start__song-btns">
+            <button class="start__song-btn start__song-btn--select">
+              Select</button
+            ><button class="start__song-btn start__song-btn--random">
+              Random
+            </button>
           </div>
         </section>
       </div>
