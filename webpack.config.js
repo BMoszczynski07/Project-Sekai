@@ -30,7 +30,7 @@ export default {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        test: /\.(png|jpe?g|gif|svg|ico|mp3)$/i,
         loader: "file-loader",
         include: path.resolve(__dirname, "src", "assets"),
         options: {

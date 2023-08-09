@@ -60,6 +60,13 @@ const songs: Song[] = [
       expert: 23,
       master: 30,
     },
+    notes: [
+      {
+        note: "regular",
+        posY: 20,
+        range: [2, 4],
+      },
+    ],
   },
 ];
 

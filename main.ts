@@ -5,10 +5,11 @@ import "./src/assets/Emu_pfp.png";
 import "./src/assets/favicon.ico";
 import "./src/assets/main-bg.jpg";
 import "./src/assets/ready_steady_song.jpg";
-import songs from "./src/scripts/shared/Song";
+import "./src/assets/song-scroll.mp3";
+import handleInitializeList from "./src/scripts/songsList";
 
 const handleGameLoad = (): void => {
-  console.log(songs);
+  handleInitializeList();
 };
 
 document.addEventListener("DOMContentLoaded", handleGameLoad);
