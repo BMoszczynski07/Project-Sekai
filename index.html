@@ -8,11 +8,16 @@
   </head>
   <body>
     <main class="start">
+      <div class="start__mute">
+        <i class="fa-solid fa-volume-high start__mute-i"></i>
+        <span class="start__mute-i__muted"></span>
+      </div>
+
       <div class="start__background-overlay">
         <img src="./assets/main-bg.jpg" class="start__background-image" />
       </div>
 
-      <header class="start__title">Project Sekai</header>
+      <h1 class="start__title">Project Sekai</h1>
 
       <div class="start__sections">
         <section class="start__section start__section-vocaloids">
@@ -27,7 +32,7 @@
                 />
               </div>
               <div class="start__vocaloid-info">
-                <h1 class="start__vocaloid-name">Hatsune Miku</h1>
+                <header class="start__vocaloid-name">Hatsune Miku</header>
                 <p class="start__vocaloid-desc">
                   Hatsune Miku (Japanese : 初音ミク) is a Japanese virtual
                   singer created by Crypton Future Media
@@ -47,7 +52,7 @@
                 <img src="./assets/Emu_pfp.png" class="start__vocaloid-pfp" />
               </div>
               <div class="start__vocaloid-info">
-                <h1 class="start__vocaloid-name">Emu Otori</h1>
+                <header class="start__vocaloid-name">Emu Otori</header>
                 <p class="start__vocaloid-desc">
                   Otori Emu (鳳えむ) is a first-year student at Miyamasuzaka
                   Girls Academy.
@@ -66,8 +71,6 @@
         </section>
 
         <section class="start__section start__section-songs">
-          <header class="start__songs">Pick a song</header>
-
           <div class="start__songs-list-container">
             <i class="fa-solid fa-arrow-up start__songs-list__arrow"></i>
             <ul class="start__songs-list">
@@ -298,11 +301,5 @@
       src="https://kit.fontawesome.com/f4c4b4acfc.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script>
-    <script>
-      const scroll = new SmoothScroll(".start__songs-list", {
-        speed: 100, // Czas trwania animacji w milisekundach
-      });
-    </script>
   </body>
 </html>
