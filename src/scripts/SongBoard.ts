@@ -7,9 +7,11 @@ interface SongMethods {
 }
 
 class SongBoard implements SongMethods {
-  constructor(public songs: Song[], public currentSong: Song) {}
+  constructor(public currentSong: Song) {}
 
   handleBoardGenerate = (board: HTMLElement): void => {};
 
   handleNotePressed = (noteNum: number): void => {};
 }
+
+export default SongBoard;
