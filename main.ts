@@ -14,15 +14,11 @@ import Game from "./src/scripts/Game";
 const handleGameLoad = (): void => {
   const game: Game = new Game(songs);
 
-  game.handleShowSongs("Kagamine Rin");
+  game.handleShowSongs();
 
   // mute option
 
   game.handleInitializeMuteOption();
-
-  // initializing scrollable list
-
-  // game.handleInitializeList();
 };
 
 document.addEventListener("DOMContentLoaded", handleGameLoad);

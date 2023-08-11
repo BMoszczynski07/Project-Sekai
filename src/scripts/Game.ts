@@ -7,7 +7,13 @@ interface GameInterface {
 
   handleShowSongs(vocaloid?: string): void;
 
-  // handleInitializeList(): void;
+  handleInitializeList(): void;
+
+  handleListScroll(
+    e: any,
+    scrollAmount: number,
+    songList: Element | null
+  ): void;
 }
 
 class Game implements GameInterface {
@@ -91,29 +97,111 @@ class Game implements GameInterface {
     return songLi;
   };
 
+  handleListScroll = (
+    e: any,
+    scrollAmount: number,
+    songList: Element | null
+  ): void => {
+    e.preventDefault();
+
+    if (this.songs.length === 1) return;
+
+    this.scroll++;
+
+    if (this.scroll % 12 !== 0) return;
+
+    const scrollAudio = new Audio();
+    scrollAudio.src = "../../assets/song-scroll.mp3";
+
+    const prevAudioElement =
+      document.querySelectorAll(".start__song")[this.curSongId];
+
+    if (e.deltaY > 0) {
+      if (this.curSongId === this.songs.length - 1) return;
+      this.curSongId++;
+
+      prevAudioElement.classList.remove("start__song--selected");
+
+      const curAudioElement =
+        document.querySelectorAll(".start__song")[this.curSongId];
+      curAudioElement.classList.add("start__song--selected");
+
+      songList?.scrollTo({
+        top: songList.scrollTop + scrollAmount,
+        left: 0,
+        behavior: "smooth",
+      });
+
+      if (!this.isGameMuted) scrollAudio.play();
+
+      return;
+    }
+
+    if (this.curSongId === 0) return;
+    this.curSongId--;
+
+    prevAudioElement.classList.remove("start__song--selected");
+
+    const curAudioElement =
+      document.querySelectorAll(".start__song")[this.curSongId];
+    curAudioElement.classList.add("start__song--selected");
+
+    songList?.scrollTo({
+      top: songList.scrollTop - scrollAmount,
+      left: 0,
+      behavior: "smooth",
+    });
+
+    if (!this.isGameMuted) scrollAudio.play();
+
+    return;
+  };
+
+  handleInitializeList = (): void => {
+    const songList = document.querySelector(".start__songs-list");
+
+    songList?.removeEventListener("wheel", (e: any) => {
+      this.handleListScroll(e, 76, songList);
+    });
+
+    this.curSongId = 0;
+
+    const firstSong = document.querySelectorAll(".start__song")[this.curSongId];
+    firstSong.classList.add("start__song--selected");
+
+    songList?.addEventListener("wheel", (e: any) => {
+      this.handleListScroll(e, 76, songList);
+    });
+  };
+
   handleShowSongs = (vocaloid?: string): void => {
     const songs = document.querySelectorAll(".start__song");
     const songsList = document.querySelector(".start__songs-list");
 
     for (const song of songs) song.remove();
 
-    if (!vocaloid) {
-      for (const song of this.songs) {
-        const songElem = this.handleCreateSong(song);
+    if (vocaloid)
+      this.songs = this.songs.filter((song) => song.authors.includes(vocaloid));
 
-        songsList?.appendChild(songElem);
-      }
+    if (this.songs.length === 0) {
+      const emptyHeader = document.createElement("h1");
+      emptyHeader.className = "start__empty-list";
+      emptyHeader.textContent = "Lista nie zawiera piosenek!";
 
+      songsList?.appendChild(emptyHeader);
       return;
     }
 
-    this.songs = this.songs.filter((song) => song.authors.includes(vocaloid));
+    const emptyHeader = document.querySelector(".start__empty-list");
+    emptyHeader?.remove();
 
     for (const song of this.songs) {
       const songElem = this.handleCreateSong(song);
 
       songsList?.appendChild(songElem);
     }
+
+    this.handleInitializeList();
   };
 
   handleInitializeMuteOption = (): void => {
@@ -130,88 +218,6 @@ class Game implements GameInterface {
       if (mute) mute.style.opacity = this.isGameMuted ? "1" : "0";
     });
   };
-
-  // handleInitializeList = (): void => {
-  //   const songList: HTMLElement | null =
-  //     document.querySelector(".start__songs-list");
-
-  //   const songs: NodeListOf<HTMLElement> =
-  //     document.querySelectorAll(".start__song");
-
-  //   // scroll algorithm
-
-  //   const songAuthors: Element | null = document.querySelectorAll(
-  //     ".start__song-authors"
-  //   )[this.curSongId];
-
-  //   songAuthors?.classList.add("start__song-authors--slide-animation");
-  //   songs[this.curSongId].classList.add("start__song--selected");
-
-  //   songList?.addEventListener("wheel", (event) => {
-  //     event.preventDefault();
-  //     this.scroll += 1;
-  //     if (this.scroll % 12 !== 0) {
-  //       return;
-  //     }
-
-  //     const prevSongAuthors: Element | null = document.querySelectorAll(
-  //       ".start__song-authors"
-  //     )[this.curSongId];
-
-  //     const scrollAudio = new Audio();
-  //     scrollAudio.src = "../../assets/song-scroll.mp3";
-
-  //     if (event.deltaY > 0) {
-  //       if (this.curSongId < songs.length - 1) {
-  //         this.curSongId++;
-  //         if (!this.isGameMuted && scrollAudio) scrollAudio.play();
-  //       }
-
-  //       songs[this.curSongId - 1].classList.remove("start__song--selected");
-  //       songs[this.curSongId].classList.add("start__song--selected");
-
-  //       const curSongAuthors: Element | null = document.querySelectorAll(
-  //         ".start__song-authors"
-  //       )[this.curSongId];
-
-  //       prevSongAuthors?.classList.remove(
-  //         "start__song-authors--slide-animation"
-  //       );
-  //       curSongAuthors?.classList.add("start__song-authors--slide-animation");
-
-  //       const scrollAmount = 76;
-  //       songList.scrollTo({
-  //         top: songList.scrollTop + scrollAmount,
-  //         left: 0,
-  //         behavior: "smooth",
-  //       });
-  //     } else {
-  //       if (this.curSongId > 0) {
-  //         this.curSongId--;
-  //         if (!this.isGameMuted && scrollAudio) scrollAudio.play();
-  //       }
-
-  //       songs[this.curSongId + 1].classList.remove("start__song--selected");
-  //       songs[this.curSongId].classList.add("start__song--selected");
-
-  //       const curSongAuthors: Element | null = document.querySelectorAll(
-  //         ".start__song-authors"
-  //       )[this.curSongId];
-
-  //       prevSongAuthors?.classList.remove(
-  //         "start__song-authors--slide-animation"
-  //       );
-  //       curSongAuthors?.classList.add("start__song-authors--slide-animation");
-
-  //       const scrollAmount = -76;
-  //       songList.scrollTo({
-  //         top: songList.scrollTop + scrollAmount,
-  //         left: 0,
-  //         behavior: "smooth",
-  //       });
-  //     }
-  //   });
-  // };
 }
 
 export default Game;

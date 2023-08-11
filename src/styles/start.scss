@@ -359,6 +359,16 @@
     }
   }
 
+  &__empty-list {
+    font-size: 16px;
+    color: #bcbcbc;
+    margin: auto;
+    // background: #f00;
+    font-family: $dm;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+  }
+
   &__song-pic {
     max-width: 42px;
     max-height: 42px;
