@@ -1,9 +1,12 @@
 {
     "compilerOptions": {
+      "sourceMap": true,
       "target": "ES6",
       "module": "ESNext",
       "outDir": "./dist/js",
-      "strict": true
+      "strict": true,
+      "noUnusedParameters": true,
+      "noUnusedLocals": true
     },
     "include": [
       "./src/scripts/**/*.ts"

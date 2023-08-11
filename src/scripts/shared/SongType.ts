@@ -7,28 +7,28 @@ type NoteType =
   | "goldUp"
   | "goldBack";
 
-type Range = number[];
+type Range = [number, number];
 
-type Note = {
+type NoteSlide = {
   note: NoteType;
-  notes?: {
+  notes: {
     beggining: NoteType;
     ending: NoteType;
   };
   posY: number;
-  posYEnd?: number;
+  posYEnd: number;
   range: Range;
 };
 
-export type Song = {
+type NoteRegular = Omit<NoteSlide, "notes" | "posYEnd">;
+
+type Note = NoteRegular | NoteSlide;
+
+type Song = {
   name: string;
   img: string;
   authors: string[];
-  info?: {
-    "Release Date"?: string;
-    Music?: "GigaP";
-    Lyrics?: "q*Left";
-  };
+  info?: string[];
   lvl: {
     easy: number;
     normal: number;
@@ -38,3 +38,5 @@ export type Song = {
   };
   notes: Note[];
 };
+
+export default Song;

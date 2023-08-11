@@ -1,4 +1,4 @@
-import { Song } from "./shared/SongType";
+import Song from "./shared/SongType";
 
 interface SongMethods {
   handleBoardGenerate(board: HTMLElement): void;
@@ -9,9 +9,13 @@ interface SongMethods {
 class SongBoard implements SongMethods {
   constructor(public currentSong: Song) {}
 
-  handleBoardGenerate = (board: HTMLElement): void => {};
+  handleBoardGenerate = (board: HTMLElement): void => {
+    console.log(board);
+  };
 
-  handleNotePressed = (noteNum: number): void => {};
+  handleNotePressed = (noteNum: number): void => {
+    console.log(noteNum);
+  };
 }
 
 export default SongBoard;

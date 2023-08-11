@@ -562,6 +562,19 @@
     border-radius: 12px;
     padding: 0 8px;
 
+    &--selected,
+    &--selected:hover {
+      background: #c4338f !important;
+    }
+
+    &--all {
+      height: 50px;
+
+      &__name {
+        margin-left: 10px;
+      }
+    }
+
     &:hover {
       background: #191919ac;
     }
