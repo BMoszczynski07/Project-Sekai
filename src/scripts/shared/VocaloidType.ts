@@ -3,17 +3,11 @@ type Badge = {
   desc: string | number;
 };
 
-type AllVocaloids = {
-  name: "All Vocaloids";
-};
-
-type OneVocaloid = {
+type Vocaloid = {
   name: string;
-  img: string;
-  desc: string;
-  badges: Badge[];
+  img?: string;
+  desc?: string;
+  badges?: Badge[];
 };
-
-type Vocaloid = OneVocaloid | AllVocaloids;
 
 export default Vocaloid;

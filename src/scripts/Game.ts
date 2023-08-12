@@ -17,6 +17,13 @@ interface GameInterface {
   ): void;
 
   handleListWheel(e: any): void;
+
+  handleCreateVocaloid(
+    vocaloid: Vocaloid,
+    vocaloidType: "regular" | "all"
+  ): HTMLLIElement;
+
+  handleShowVocaloids(): void;
 }
 
 class Game implements GameInterface {
@@ -35,6 +42,99 @@ class Game implements GameInterface {
     this.songs = songs;
     this.songsLoaded = songs;
     this.vocaloids = vocaloids;
+  }
+
+  handleCreateVocaloid = (
+    vocaloid: Vocaloid,
+    vocaloidType: "regular" | "all"
+  ): HTMLLIElement => {
+    const liElement = document.createElement("li");
+    liElement.classList.add("start__vocaloid");
+
+    if (vocaloidType === "all") {
+      liElement.classList.add(
+        "start__vocaloid--all",
+        "start__vocaloid--selected"
+      );
+      const allVocaloidName = document.createElement("header");
+      allVocaloidName.classList.add(
+        "start__vocaloid-name",
+        "start__vocaloid--all__name"
+      );
+      allVocaloidName.textContent = "All Vocaloids";
+      liElement.appendChild(allVocaloidName);
+    } else {
+      liElement.setAttribute("data-vocaloid", vocaloid.name);
+
+      const profileDiv = document.createElement("div");
+      profileDiv.classList.add("start__vocaloid-profile");
+
+      const pfpImg = document.createElement("img");
+      if (vocaloid.img) pfpImg.src = vocaloid.img;
+      pfpImg.classList.add("start__vocaloid-pfp");
+      profileDiv.appendChild(pfpImg);
+
+      const infoDiv = document.createElement("div");
+      infoDiv.classList.add("start__vocaloid-info");
+
+      const nameHeader = document.createElement("header");
+      nameHeader.classList.add("start__vocaloid-name");
+      nameHeader.textContent = vocaloid.name;
+
+      const descP = document.createElement("p");
+      descP.classList.add("start__vocaloid-desc");
+      if (vocaloid.desc) descP.textContent = vocaloid.desc;
+
+      const badgesUl = document.createElement("ul");
+      badgesUl.classList.add("start__vocaloid-badges");
+
+      if (vocaloid.badges)
+        for (const badgeText of vocaloid.badges) {
+          const badgeLi = document.createElement("li");
+
+          let badgeClass: string | undefined;
+
+          switch (badgeText.type) {
+            case "Release Date":
+              badgeClass = "start__badge--release";
+              break;
+            case "Height":
+              badgeClass = "start__badge--height";
+              break;
+            case "Age":
+              badgeClass = "start__badge--age";
+              break;
+          }
+
+          badgeLi.classList.add(`start__vocaloid-badge`);
+          badgeLi.classList.add(badgeClass || "unknown");
+          badgeLi.textContent += badgeText.type;
+          badgeLi.textContent += ` ${badgeText.desc}`;
+          badgesUl.appendChild(badgeLi);
+        }
+
+      infoDiv.appendChild(nameHeader);
+      infoDiv.appendChild(descP);
+      infoDiv.appendChild(badgesUl);
+
+      liElement.appendChild(profileDiv);
+      liElement.appendChild(infoDiv);
+    }
+
+    return liElement;
+  };
+
+  handleShowVocaloids(): void {
+    const vocaloidsList = document.querySelector(".start__vocaloids-list");
+
+    for (const vocaloid of this.vocaloids) {
+      const vocaloidElem =
+        vocaloid.name === "All Vocaloids"
+          ? this.handleCreateVocaloid(vocaloid, "all")
+          : this.handleCreateVocaloid(vocaloid, "regular");
+
+      vocaloidsList?.appendChild(vocaloidElem);
+    }
   }
 
   handleCreateSong = (song: Song, index: number): HTMLLIElement => {

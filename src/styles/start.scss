@@ -546,7 +546,8 @@
   }
 
   &__vocaloid-desc {
-    // background: #f00;
+    height: 45px;
+    overflow-y: scroll;
     margin-top: 1px;
     letter-spacing: 0.15px;
     font-size: 11px;
@@ -557,6 +558,8 @@
     font-weight: 600;
     width: 190px;
     margin-bottom: 0;
+
+    @include scroll(0);
   }
 
   &__vocaloid {
@@ -622,17 +625,17 @@
     font-family: $sf;
   }
 
-  &__badge--orange {
+  &__badge--age {
     background: #ad7c11;
     border: 1px solid #cbaf73;
   }
 
-  &__badge--purple {
+  &__badge--height {
     background: #5d088b;
     border: 1px solid #af0bac;
   }
 
-  &__badge--blue {
+  &__badge--release {
     background: #0c77a5;
     border: 1px solid #619bbc;
   }

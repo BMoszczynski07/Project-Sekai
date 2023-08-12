@@ -21,6 +21,8 @@ const handleGameLoad = (): void => {
 
   game.handleInitializeMuteOption();
 
+  game.handleShowVocaloids();
+
   const vocaloidsBtns = document.querySelectorAll(".start__vocaloid");
 
   vocaloidsBtns.forEach((vocaloid) => {

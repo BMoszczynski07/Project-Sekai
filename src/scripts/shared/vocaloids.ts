@@ -3,7 +3,7 @@ import Vocaloid from "./VocaloidType";
 const vocaloids: Vocaloid[] = [
   {
     name: "Hatsune Miku",
-    img: "./assets/Hatsune_Miku_pfp.jpg",
+    img: "./assets/Hatsune_Miku_pfp.png",
     desc: "Hatsune Miku (Japanese : 初音ミク) is a Japanese virtual singer created by Crypton Future Media",
     badges: [
       {
@@ -18,7 +18,7 @@ const vocaloids: Vocaloid[] = [
   },
   {
     name: "Emu Otori",
-    img: "./assets/Emu_pfp.jpg",
+    img: "./assets/Emu_pfp.png",
     desc: "Otori Emu (鳳えむ) is a first-year student at Miyamasuzaka Girls Academy.",
     badges: [
       {
