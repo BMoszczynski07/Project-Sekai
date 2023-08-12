@@ -32,6 +32,17 @@ const vocaloids: Vocaloid[] = [
     ],
   },
   {
+    name: "Kagamine Rin",
+    img: "./assets/Rin_pfp.png",
+    desc: "Kagamine Rin & Len（鏡音リン・レン, kagamine rin to ren) is the third issue of Vocaloid 2, featuring the voices of two characters - Rin (girl) and Len (boy).",
+    badges: [
+      {
+        type: "Illustration",
+        desc: "KEI",
+      },
+    ],
+  },
+  {
     name: "All Vocaloids",
   },
 ];

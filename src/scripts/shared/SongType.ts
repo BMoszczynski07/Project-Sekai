@@ -13,6 +13,7 @@ type NoteSlide = {
   note: NoteType;
   notes: {
     beggining: NoteType;
+    path: string;
     ending: NoteType;
   };
   posY: number;

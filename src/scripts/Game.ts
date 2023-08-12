@@ -25,6 +25,8 @@ interface GameInterface {
   ): HTMLLIElement;
 
   handleShowVocaloids(): void;
+
+  handlePickDifficulty(difficulty: Difficulty): void;
 }
 
 class Game implements GameInterface {
@@ -34,7 +36,7 @@ class Game implements GameInterface {
   songs: Song[];
   songsLoaded: Song[];
 
-  chosenDifficulty: Difficulty = "hard";
+  chosenDifficulty: Difficulty = "normal";
 
   vocaloids: Vocaloid[];
 
@@ -45,6 +47,57 @@ class Game implements GameInterface {
     this.songs = songs;
     this.songsLoaded = songs;
     this.vocaloids = vocaloids;
+  }
+
+  handlePickDifficulty(difficulty: Difficulty): void {
+    const songLvl: NodeListOf<HTMLElement> | null =
+      document.querySelectorAll(".start__song-lvl");
+    const songLevel: NodeListOf<HTMLElement> | null =
+      document.querySelectorAll(".start__song-level");
+    const bgGlow = document.querySelector(".start__bg-glow");
+    const chosenSongBg = document.querySelector(".start__chosen-song__bg");
+    const allGameLvl = document.querySelectorAll(".start__lvl");
+    const chosenGameLvl = document.querySelector(
+      `[data-difficulty=${difficulty}]`
+    );
+
+    chosenGameLvl?.classList.remove(`start__lvl--${this.chosenDifficulty}`);
+    bgGlow?.classList.remove(`start__bg-glow--${this.chosenDifficulty}`);
+    chosenSongBg?.classList.remove(
+      `start__chosen-song__bg--${this.chosenDifficulty}`
+    );
+
+    for (const gameLvl of allGameLvl) {
+      const difficultyAttr = gameLvl.getAttribute("data-difficulty");
+
+      gameLvl.classList.remove(`start__lvl--${difficultyAttr}`);
+    }
+
+    this.chosenDifficulty = difficulty;
+
+    chosenGameLvl?.classList.add(`start__lvl--${difficulty}`);
+    bgGlow?.classList.add(`start__bg-glow--${difficulty}`);
+    chosenSongBg?.classList.add(`start__chosen-song__bg--${difficulty}`);
+
+    if (!songLvl || !songLevel) return;
+
+    if (difficulty === "auto") {
+      for (let i = 0; i < this.songsLoaded.length; i++) {
+        songLvl[i].style.color = "#606060";
+        songLevel[i].style.color = "#878787";
+
+        songLevel[i].textContent = "--";
+      }
+
+      return;
+    }
+
+    for (const [index, lvl] of songLevel.entries()) {
+      songLvl[index].style.color = "#47bfd7";
+      lvl.style.color = "#0c7baf";
+
+      lvl.textContent = `${this.songsLoaded[index].lvl[difficulty]}`;
+    }
   }
 
   handleCreateVocaloid = (
@@ -98,7 +151,7 @@ class Game implements GameInterface {
           let badgeClass: string | undefined;
 
           switch (badgeText.type) {
-            case "Release Date":
+            case "Release":
               badgeClass = "start__badge--release";
               break;
             case "Height":
@@ -106,6 +159,9 @@ class Game implements GameInterface {
               break;
             case "Age":
               badgeClass = "start__badge--age";
+              break;
+            case "Illustration":
+              badgeClass = "start__badge--illustration";
               break;
           }
 

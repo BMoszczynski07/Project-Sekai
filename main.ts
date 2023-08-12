@@ -1,6 +1,7 @@
 import "./src/styles/main.scss";
 import "./src/assets/Hatsune_Miku.png";
 import "./src/assets/Hatsune_Miku_pfp.png";
+import "./src/assets/Rin_pfp.png";
 import "./src/assets/Emu_pfp.png";
 import "./src/assets/favicon.ico";
 import "./src/assets/main-bg.jpg";
@@ -64,6 +65,8 @@ const handleGameLoad = (): void => {
 
         clickAudio.play();
       }
+
+      game.handlePickDifficulty(gameLvlDifficulty);
     });
   });
 };

@@ -624,7 +624,7 @@
     gap: 10px;
     align-items: center;
     width: 92%;
-    height: 115px;
+    height: 125px;
     background: #0c0c0c65;
     cursor: pointer;
     transition: 0.1s;
@@ -695,6 +695,11 @@
   &__badge--release {
     background: #0c77a5;
     border: 1px solid #619bbc;
+  }
+
+  &__badge--illustration {
+    background: #159e06;
+    border: 1px solid #53e84b;
   }
 
   &__vocaloid-profile {
