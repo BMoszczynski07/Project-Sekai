@@ -1,3 +1,4 @@
+import Difficulty from "./shared/Difficulty";
 import Song from "./shared/SongType";
 import Vocaloid from "./shared/VocaloidType";
 
@@ -32,6 +33,8 @@ class Game implements GameInterface {
 
   songs: Song[];
   songsLoaded: Song[];
+
+  chosenDifficulty: Difficulty = "hard";
 
   vocaloids: Vocaloid[];
 
@@ -197,7 +200,13 @@ class Game implements GameInterface {
 
     const songLevel = document.createElement("p");
     songLevel.className = "start__song-level";
-    songLevel.textContent = `${song.lvl.normal}`;
+    if (this.chosenDifficulty !== "auto")
+      songLevel.textContent = `${song.lvl[this.chosenDifficulty]}`;
+    else {
+      songLevel.textContent = "--";
+      songLvl.style.color = "#606060";
+      songLevel.style.color = "#878787";
+    }
 
     songLevelOverlay.appendChild(songLvl);
     songLevelOverlay.appendChild(songLevel);

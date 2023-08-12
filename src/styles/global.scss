@@ -58,6 +58,38 @@ $small: 19px;
   }
 }
 
+@mixin difficultyColors() {
+  &--easy,
+  &--easy::after {
+    background: #28de13;
+  }
+
+  &--normal,
+  &--normal::after {
+    background: #047ed0;
+  }
+
+  &--hard,
+  &--hard::after {
+    background: #f9f91b;
+  }
+
+  &--expert,
+  &--expert::after {
+    background: #e62d11;
+  }
+
+  &--master,
+  &--master::after {
+    background: #c01ac6;
+  }
+
+  &--auto,
+  &--auto::after {
+    background: #595959;
+  }
+}
+
 @mixin flex($direction: row, $align: center, $justify: center, $wrap: wrap) {
   display: flex;
   direction: $direction;

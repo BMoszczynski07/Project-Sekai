@@ -8,9 +8,11 @@ import "./src/assets/po_pi_po_song.jpg";
 import "./src/assets/ready_steady_song.jpg";
 import "./src/assets/ghost_rule_song.jpg";
 import "./src/assets/song-scroll.mp3";
+import "./src/assets/click.wav";
 import songs from "./src/scripts/shared/songs";
 import Game from "./src/scripts/Game";
 import vocaloids from "./src/scripts/shared/vocaloids";
+import Difficulty from "./src/scripts/shared/Difficulty";
 
 const handleGameLoad = (): void => {
   const game: Game = new Game(songs, vocaloids);
@@ -31,6 +33,37 @@ const handleGameLoad = (): void => {
         vocaloid?.getAttribute("data-vocaloid");
 
       game.handleShowSongs(vocaloidName);
+    });
+  });
+
+  const gameLvls = document.querySelectorAll(".start__lvl");
+
+  const bgGlow = document.querySelector(".start__bg-glow");
+  const chosenSongBg = document.querySelector(".start__chosen-song__bg");
+  const chosenGameLvl = document.querySelector(
+    `[data-difficulty=${game.chosenDifficulty}]`
+  );
+
+  bgGlow?.classList.add(`start__bg-glow--${game.chosenDifficulty}`);
+  chosenSongBg?.classList.add(
+    `start__chosen-song__bg--${game.chosenDifficulty}`
+  );
+  chosenGameLvl?.classList.add(`start__lvl--${game.chosenDifficulty}`);
+
+  gameLvls.forEach((gameLvl) => {
+    gameLvl.addEventListener("click", () => {
+      const gameLvlDifficulty: Difficulty = gameLvl.getAttribute(
+        "data-difficulty"
+      ) as Difficulty;
+
+      if (gameLvlDifficulty === game.chosenDifficulty) return;
+
+      if (!game.isGameMuted) {
+        const clickAudio = new Audio();
+        clickAudio.src = "./assets/click.wav";
+
+        clickAudio.play();
+      }
     });
   });
 };

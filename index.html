@@ -8,6 +8,8 @@
   </head>
   <body>
     <main class="start">
+      <span class="start__bg-glow start__bg-glow"></span>
+
       <div class="start__mute">
         <i class="fa-solid fa-volume-high start__mute-i"></i>
         <span class="start__mute-i__muted"></span>
@@ -56,6 +58,7 @@
 
         <section class="start__section start__section-song">
           <div class="start__song-img__overlay">
+            <span class="start__chosen-song__bg start__chosen-song__bg"></span>
             <img
               src="./assets/ready_steady_song.jpg"
               class="start__selected-song__img"
@@ -93,12 +96,12 @@
       </div>
 
       <ul class="start__difficulty">
-        <li class="start__lvl">Easy</li>
-        <li class="start__lvl">Normal</li>
-        <li class="start__lvl">Hard</li>
-        <li class="start__lvl">Expert</li>
-        <li class="start__lvl">Master</li>
-        <li class="start__lvl">Auto</li>
+        <li class="start__lvl" data-difficulty="easy">Easy</li>
+        <li class="start__lvl" data-difficulty="normal">Normal</li>
+        <li class="start__lvl" data-difficulty="hard">Hard</li>
+        <li class="start__lvl" data-difficulty="expert">Expert</li>
+        <li class="start__lvl" data-difficulty="master">Master</li>
+        <li class="start__lvl" data-difficulty="auto">Auto</li>
       </ul>
     </main>
 

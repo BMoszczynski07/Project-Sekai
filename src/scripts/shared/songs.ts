@@ -11,10 +11,10 @@ let songs: Song[] = [
     ],
     lvl: {
       easy: 6,
-      normal: 13,
-      hard: 18,
-      expert: 23,
-      master: 30,
+      normal: 15,
+      hard: 19,
+      expert: 25,
+      master: 33,
     },
     notes: [
       {
@@ -34,9 +34,9 @@ let songs: Song[] = [
     ],
     lvl: {
       easy: 6,
-      normal: 11,
+      normal: 13,
       hard: 18,
-      expert: 23,
+      expert: 21,
       master: 30,
     },
     notes: [
@@ -56,11 +56,11 @@ let songs: Song[] = [
       { type: "Music", desc: "GigaP" },
     ],
     lvl: {
-      easy: 6,
+      easy: 5,
       normal: 14,
-      hard: 18,
-      expert: 23,
-      master: 30,
+      hard: 20,
+      expert: 22,
+      master: 29,
     },
     notes: [
       {
