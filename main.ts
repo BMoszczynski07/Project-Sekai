@@ -10,9 +10,10 @@ import "./src/assets/ghost_rule_song.jpg";
 import "./src/assets/song-scroll.mp3";
 import songs from "./src/scripts/shared/songs";
 import Game from "./src/scripts/Game";
+import vocaloids from "./src/scripts/shared/vocaloids";
 
 const handleGameLoad = (): void => {
-  const game: Game = new Game(songs);
+  const game: Game = new Game(songs, vocaloids);
 
   game.handleShowSongs(null);
 
@@ -20,14 +21,12 @@ const handleGameLoad = (): void => {
 
   game.handleInitializeMuteOption();
 
-  const vocaloids = document.querySelectorAll(".start__vocaloid");
+  const vocaloidsBtns = document.querySelectorAll(".start__vocaloid");
 
-  vocaloids.forEach((vocaloid) => {
+  vocaloidsBtns.forEach((vocaloid) => {
     vocaloid.addEventListener("click", () => {
       const vocaloidName: string | null =
         vocaloid?.getAttribute("data-vocaloid");
-
-      console.log(vocaloidName);
 
       game.handleShowSongs(vocaloidName);
     });

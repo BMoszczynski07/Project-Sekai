@@ -1,4 +1,5 @@
 import Song from "./shared/SongType";
+import Vocaloid from "./shared/VocaloidType";
 
 interface GameInterface {
   handleInitializeMuteOption(): void;
@@ -25,12 +26,15 @@ class Game implements GameInterface {
   songs: Song[];
   songsLoaded: Song[];
 
+  vocaloids: Vocaloid[];
+
   scroll = 0;
   curSongId = 0;
 
-  constructor(songs: Song[]) {
+  constructor(songs: Song[], vocaloids: Vocaloid[]) {
     this.songs = songs;
     this.songsLoaded = songs;
+    this.vocaloids = vocaloids;
   }
 
   handleCreateSong = (song: Song, index: number): HTMLLIElement => {
@@ -111,9 +115,6 @@ class Game implements GameInterface {
     songList: Element | null
   ): void => {
     e.preventDefault();
-
-    if (this.songs.length === 1) return;
-
     this.scroll++;
 
     if (this.scroll % 12 !== 0) return;
@@ -190,20 +191,23 @@ class Game implements GameInterface {
   handleInitializeList = (): void => {
     const songList = document.querySelector(".start__songs-list");
 
-    songList?.removeEventListener("wheel", this.handleListWheel);
-
     this.curSongId = 0;
 
     const firstSong = document.querySelectorAll(".start__song")[this.curSongId];
     firstSong.classList.add("start__song--selected");
 
-    songList?.addEventListener("wheel", this.handleListWheel);
+    console.log(this.songsLoaded);
+
+    if (this.songsLoaded.length > 1)
+      songList?.addEventListener("wheel", this.handleListWheel);
   };
 
   handleShowSongs = (vocaloid: string | null): void => {
     const allSongs = document.querySelectorAll(".start__song");
     const allVocaloids = document.querySelectorAll(".start__vocaloid");
     const songList = document.querySelector(".start__songs-list");
+
+    songList?.removeEventListener("wheel", this.handleListWheel);
 
     for (const vocaloid of allVocaloids)
       vocaloid.classList.remove("start__vocaloid--selected");
@@ -220,11 +224,13 @@ class Game implements GameInterface {
 
     if (songList) songList.scrollTop = 0;
 
-    if (vocaloid !== null)
-      this.songsLoaded = this.songs.filter((song) =>
-        song.authors.includes(vocaloid)
-      );
-    else this.songsLoaded = this.songs;
+    if (vocaloid !== null) {
+      console.log(vocaloid);
+
+      this.songsLoaded = [
+        ...this.songs.filter((song) => song.authors.includes(vocaloid)),
+      ];
+    } else this.songsLoaded = this.songs;
 
     if (this.songsLoaded.length === 0) {
       const emptyHeader = document.createElement("h1");
