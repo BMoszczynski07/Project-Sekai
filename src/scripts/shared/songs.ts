@@ -5,7 +5,10 @@ let songs: Song[] = [
     name: "Ready Steady",
     img: "./assets/ready_steady_song.jpg",
     authors: ["Hatsune Miku", "Kagamine Rin", "Kagamine Len"],
-    info: ["Release Date: 07/07/2021", "Music: GigaP"],
+    info: [
+      { type: "Release Date", desc: "07/07/2021" },
+      { type: "Music", desc: "GigaP" },
+    ],
     lvl: {
       easy: 6,
       normal: 13,
@@ -25,7 +28,10 @@ let songs: Song[] = [
     name: "Po Pi Po",
     img: "./assets/po_pi_po_song.jpg",
     authors: ["Hatsune Miku"],
-    info: ["Release Date: 07/07/2021", "Music: GigaP"],
+    info: [
+      { type: "Release Date", desc: "07/07/2021" },
+      { type: "Music", desc: "GigaP" },
+    ],
     lvl: {
       easy: 6,
       normal: 11,
@@ -45,7 +51,10 @@ let songs: Song[] = [
     name: "Ghost Rule",
     img: "./assets/ghost_rule_song.jpg",
     authors: ["Hatsune Miku"],
-    info: ["Release Date: 07/07/2021", "Music: GigaP"],
+    info: [
+      { type: "Release Date", desc: "07/07/2021" },
+      { type: "Music", desc: "GigaP" },
+    ],
     lvl: {
       easy: 6,
       normal: 14,

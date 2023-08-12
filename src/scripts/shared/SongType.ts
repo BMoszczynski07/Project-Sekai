@@ -24,11 +24,16 @@ type NoteRegular = Omit<NoteSlide, "notes" | "posYEnd">;
 
 type Note = NoteRegular | NoteSlide;
 
+type SongInfo = {
+  type: string;
+  desc: string;
+};
+
 type Song = {
   name: string;
   img: string;
   authors: string[];
-  info?: string[];
+  info?: SongInfo[];
   lvl: {
     easy: number;
     normal: number;

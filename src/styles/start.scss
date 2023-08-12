@@ -564,17 +564,17 @@
     gap: 10px;
     align-items: center;
     width: 92%;
-    height: 130px;
-    background: #101010ac;
+    height: 115px;
+    background: #0c0c0c65;
     cursor: pointer;
     transition: 0.1s;
     margin-bottom: 8px;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 0 8px;
 
     &--selected,
     &--selected:hover {
-      background: #c4338f !important;
+      background: #000000ac !important;
     }
 
     &--all {
@@ -586,7 +586,7 @@
     }
 
     &:hover {
-      background: #191919ac;
+      background: #20202065;
     }
   }
 

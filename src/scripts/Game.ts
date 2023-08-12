@@ -3,9 +3,9 @@ import Song from "./shared/SongType";
 interface GameInterface {
   handleInitializeMuteOption(): void;
 
-  handleCreateSong(song: Song): HTMLLIElement;
+  handleCreateSong(song: Song, index: number): HTMLLIElement;
 
-  handleShowSongs(vocaloid?: string): void;
+  handleShowSongs(vocaloid?: string | null): void;
 
   handleInitializeList(): void;
 
@@ -14,20 +14,26 @@ interface GameInterface {
     scrollAmount: number,
     songList: Element | null
   ): void;
+
+  handleListWheel(e: any): void;
 }
 
 class Game implements GameInterface {
   // globals
   isGameMuted = true;
+
   songs: Song[];
+  songsLoaded: Song[];
+
   scroll = 0;
   curSongId = 0;
 
   constructor(songs: Song[]) {
     this.songs = songs;
+    this.songsLoaded = songs;
   }
 
-  handleCreateSong = (song: Song): HTMLLIElement => {
+  handleCreateSong = (song: Song, index: number): HTMLLIElement => {
     const songLi = document.createElement("li");
     songLi.className = "start__song";
 
@@ -51,7 +57,9 @@ class Game implements GameInterface {
     songAuthorsContainer.className = "start__song-authors__container";
 
     const songAuthors = document.createElement("p");
-    songAuthors.className = "start__song-authors";
+    songAuthors.className = `start__song-authors ${
+      index === 0 ? "start__song-authors--slide-animation" : ""
+    }`;
 
     songAuthorsContainer.appendChild(songAuthors);
 
@@ -66,7 +74,7 @@ class Game implements GameInterface {
 
     if (song.info) {
       for (const [index, info] of song.info.entries()) {
-        songInfo.innerHTML += `${info} ${
+        songInfo.innerHTML += `${info.type}: ${info.desc} ${
           index < song.info.length - 1 ? "&bull;" : ""
         } `;
       }
@@ -116,15 +124,25 @@ class Game implements GameInterface {
     const prevAudioElement =
       document.querySelectorAll(".start__song")[this.curSongId];
 
+    const prevAuthors = document.querySelectorAll(".start__song-authors")[
+      this.curSongId
+    ];
+
     if (e.deltaY > 0) {
       if (this.curSongId === this.songs.length - 1) return;
       this.curSongId++;
 
-      prevAudioElement.classList.remove("start__song--selected");
-
       const curAudioElement =
         document.querySelectorAll(".start__song")[this.curSongId];
       curAudioElement.classList.add("start__song--selected");
+
+      prevAuthors.classList.remove("start__song-authors--slide-animation");
+      prevAudioElement.classList.remove("start__song--selected");
+
+      const curAuthors = document.querySelectorAll(".start__song-authors")[
+        this.curSongId
+      ];
+      curAuthors.classList.add("start__song-authors--slide-animation");
 
       songList?.scrollTo({
         top: songList.scrollTop + scrollAmount,
@@ -140,11 +158,17 @@ class Game implements GameInterface {
     if (this.curSongId === 0) return;
     this.curSongId--;
 
-    prevAudioElement.classList.remove("start__song--selected");
-
     const curAudioElement =
       document.querySelectorAll(".start__song")[this.curSongId];
     curAudioElement.classList.add("start__song--selected");
+
+    prevAuthors.classList.remove("start__song-authors--slide-animation");
+    prevAudioElement.classList.remove("start__song--selected");
+
+    const curAuthors = document.querySelectorAll(".start__song-authors")[
+      this.curSongId
+    ];
+    curAuthors.classList.add("start__song-authors--slide-animation");
 
     songList?.scrollTo({
       top: songList.scrollTop - scrollAmount,
@@ -157,48 +181,64 @@ class Game implements GameInterface {
     return;
   };
 
+  handleListWheel = (e: any): void => {
+    const songList = document.querySelector(".start__songs-list");
+
+    this.handleListScroll(e, 76, songList);
+  };
+
   handleInitializeList = (): void => {
     const songList = document.querySelector(".start__songs-list");
 
-    songList?.removeEventListener("wheel", (e: any) => {
-      this.handleListScroll(e, 76, songList);
-    });
+    songList?.removeEventListener("wheel", this.handleListWheel);
 
     this.curSongId = 0;
 
     const firstSong = document.querySelectorAll(".start__song")[this.curSongId];
     firstSong.classList.add("start__song--selected");
 
-    songList?.addEventListener("wheel", (e: any) => {
-      this.handleListScroll(e, 76, songList);
-    });
+    songList?.addEventListener("wheel", this.handleListWheel);
   };
 
-  handleShowSongs = (vocaloid?: string): void => {
-    const songs = document.querySelectorAll(".start__song");
-    const songsList = document.querySelector(".start__songs-list");
+  handleShowSongs = (vocaloid: string | null): void => {
+    const allSongs = document.querySelectorAll(".start__song");
+    const allVocaloids = document.querySelectorAll(".start__vocaloid");
+    const songList = document.querySelector(".start__songs-list");
 
-    for (const song of songs) song.remove();
+    for (const vocaloid of allVocaloids)
+      vocaloid.classList.remove("start__vocaloid--selected");
 
-    if (vocaloid)
-      this.songs = this.songs.filter((song) => song.authors.includes(vocaloid));
+    const selectedVocaloid = document.querySelector(
+      vocaloid ? `[data-vocaloid="${vocaloid}"]` : ".start__vocaloid--all"
+    );
+    selectedVocaloid?.classList.add("start__vocaloid--selected");
 
-    if (this.songs.length === 0) {
-      const emptyHeader = document.createElement("h1");
-      emptyHeader.className = "start__empty-list";
-      emptyHeader.textContent = "Lista nie zawiera piosenek!";
-
-      songsList?.appendChild(emptyHeader);
-      return;
-    }
+    for (const song of allSongs) song.remove();
 
     const emptyHeader = document.querySelector(".start__empty-list");
     emptyHeader?.remove();
 
-    for (const song of this.songs) {
-      const songElem = this.handleCreateSong(song);
+    if (songList) songList.scrollTop = 0;
 
-      songsList?.appendChild(songElem);
+    if (vocaloid !== null)
+      this.songsLoaded = this.songs.filter((song) =>
+        song.authors.includes(vocaloid)
+      );
+    else this.songsLoaded = this.songs;
+
+    if (this.songsLoaded.length === 0) {
+      const emptyHeader = document.createElement("h1");
+      emptyHeader.className = "start__empty-list";
+      emptyHeader.textContent = "Lista nie zawiera piosenek!";
+
+      songList?.appendChild(emptyHeader);
+      return;
+    }
+
+    for (const [index, song] of this.songsLoaded.entries()) {
+      const songElem = this.handleCreateSong(song, index);
+
+      songList?.appendChild(songElem);
     }
 
     this.handleInitializeList();

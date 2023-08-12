@@ -14,11 +14,24 @@ import Game from "./src/scripts/Game";
 const handleGameLoad = (): void => {
   const game: Game = new Game(songs);
 
-  game.handleShowSongs();
+  game.handleShowSongs(null);
 
   // mute option
 
   game.handleInitializeMuteOption();
+
+  const vocaloids = document.querySelectorAll(".start__vocaloid");
+
+  vocaloids.forEach((vocaloid) => {
+    vocaloid.addEventListener("click", () => {
+      const vocaloidName: string | null =
+        vocaloid?.getAttribute("data-vocaloid");
+
+      console.log(vocaloidName);
+
+      game.handleShowSongs(vocaloidName);
+    });
+  });
 };
 
 document.addEventListener("DOMContentLoaded", handleGameLoad);
