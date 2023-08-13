@@ -16,7 +16,16 @@
       </div>
 
       <div class="start__background-overlay">
-        <img src="./assets/main-bg.jpg" class="start__background-image" />
+        <video class="start__background-video">
+          <source
+            class="start__video-source"
+            src="./assets/ready_steady.mp4"
+            type="video/mp4"
+            autoplay
+            muted
+          />
+          Twoja przeglądarka nie obsługuje odtwarzacza wideo
+        </video>
       </div>
 
       <h1 class="start__title">Project Sekai</h1>
@@ -65,25 +74,25 @@
             />
           </div>
 
-          <h1 class="start__song-header">Ready Steady</h1>
+          <h1 class="start__song-header">Ready Steadyasjakdjaskdjakdjksd</h1>
           <h5 class="start__selected-song__authors">
             Hatsune Miku, Kagamine Rin, Kagamine Len
           </h5>
 
-          <div class="start__song-badges">
-            <div class="start__song-badge">
+          <ul class="start__song-badges">
+            <li class="start__song-badge">
               <i class="fa-brands fa-itunes-note"></i>
               <h5 class="start__song-badge__desc">07/07/2021</h5>
-            </div>
-            <div class="start__song-badge">
+            </li>
+            <li class="start__song-badge">
               <i class="fa-brands fa-itunes-note"></i>
               <h5 class="start__song-badge__desc">GigaP</h5>
-            </div>
-            <div class="start__song-badge">
+            </li>
+            <li class="start__song-badge">
               <i class="fa-solid fa-a"></i>
               <h5 class="start__song-badge__desc">q*Left</h5>
-            </div>
-          </div>
+            </li>
+          </ul>
 
           <div class="start__song-btns">
             <button class="start__song-btn start__song-btn--select">
@@ -95,14 +104,14 @@
         </section>
       </div>
 
-      <ul class="start__difficulty">
-        <li class="start__lvl" data-difficulty="easy">Easy</li>
-        <li class="start__lvl" data-difficulty="normal">Normal</li>
-        <li class="start__lvl" data-difficulty="hard">Hard</li>
-        <li class="start__lvl" data-difficulty="expert">Expert</li>
-        <li class="start__lvl" data-difficulty="master">Master</li>
-        <li class="start__lvl" data-difficulty="auto">Auto</li>
-      </ul>
+      <div class="start__difficulty">
+        <button class="start__lvl" data-difficulty="easy">Easy</button>
+        <button class="start__lvl" data-difficulty="normal">Normal</button>
+        <button class="start__lvl" data-difficulty="hard">Hard</button>
+        <button class="start__lvl" data-difficulty="expert">Expert</button>
+        <button class="start__lvl" data-difficulty="master">Master</button>
+        <button class="start__lvl" data-difficulty="auto">Auto</button>
+      </div>
     </main>
 
     <script

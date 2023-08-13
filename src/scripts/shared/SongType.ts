@@ -27,14 +27,15 @@ type Note = NoteRegular | NoteSlide;
 
 type SongInfo = {
   type: string;
-  desc: string;
+  desc: string | number;
 };
 
 type Song = {
   name: string;
   img: string;
+  musicVideo: string;
   authors: string[];
-  info?: SongInfo[];
+  info: SongInfo[];
   lvl: {
     easy: number;
     normal: number;

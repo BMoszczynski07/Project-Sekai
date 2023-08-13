@@ -1,3 +1,4 @@
+import Random from "./Random";
 import Difficulty from "./shared/Difficulty";
 import Song from "./shared/SongType";
 import Vocaloid from "./shared/VocaloidType";
@@ -27,6 +28,14 @@ interface GameInterface {
   handleShowVocaloids(): void;
 
   handlePickDifficulty(difficulty: Difficulty): void;
+
+  handleViewSong(): void;
+
+  handleCreateIcon(type: string): HTMLLIElement;
+
+  handleCreateBadge(type: string, desc: string | number): HTMLElement;
+
+  handleShowMusicVideo(): void;
 }
 
 class Game implements GameInterface {
@@ -43,10 +52,88 @@ class Game implements GameInterface {
   scroll = 0;
   curSongId = 0;
 
+  musicVideoTimeout: NodeJS.Timeout | null = null;
+  musicVideoInterval: NodeJS.Timer | null = null;
+
   constructor(songs: Song[], vocaloids: Vocaloid[]) {
     this.songs = songs;
     this.songsLoaded = songs;
     this.vocaloids = vocaloids;
+  }
+
+  handleCreateIcon(type: string): HTMLLIElement {
+    const icon = document.createElement("i") as HTMLLIElement;
+
+    switch (type) {
+      case "Release Date":
+        icon.classList.add("fa-solid");
+        icon.classList.add("fa-calendar-days");
+        break;
+      case "Music":
+        icon.classList.add("fa-solid");
+        icon.classList.add("fa-music");
+        break;
+      default:
+        icon.classList.add("unknown");
+        break;
+    }
+
+    return icon;
+  }
+
+  handleCreateBadge(type: string, desc: string | number): HTMLElement {
+    const songBadge = document.createElement("li");
+    songBadge.classList.add("start__song-badge");
+
+    const songIcon = this.handleCreateIcon(type);
+    songBadge.appendChild(songIcon);
+
+    const songDesc = document.createElement("h5");
+    songDesc.classList.add("start__song-badge__desc");
+    songDesc.textContent = `${desc}`;
+    songBadge.appendChild(songDesc);
+
+    return songBadge;
+  }
+
+  handleViewSong(): void {
+    const songImg: HTMLImageElement | null = document.querySelector(
+      ".start__selected-song__img"
+    );
+    const songHeader = document.querySelector(".start__song-header");
+    const songAuthors = document.querySelector(
+      ".start__selected-song__authors"
+    );
+    const curSong: Song = this.songsLoaded[this.curSongId];
+
+    if (!songImg || !songHeader || !songAuthors) return;
+
+    const prevBadges = document.querySelectorAll(".start__song-badge");
+
+    for (const prevBadge of prevBadges) prevBadge.remove();
+
+    songImg.src = curSong.img;
+    songHeader.textContent = curSong.name;
+
+    songAuthors.textContent = "";
+
+    for (const [index, author] of curSong.authors.entries()) {
+      if (index !== curSong.authors.length - 1) {
+        songAuthors.textContent += `${author}, `;
+      } else songAuthors.textContent += author;
+    }
+
+    const songBadges = document.querySelector(".start__song-badges");
+
+    if (!songBadges) return;
+
+    for (const curSongBadge of curSong.info) {
+      const { type, desc } = curSongBadge;
+
+      const newBadge = this.handleCreateBadge(type, desc);
+
+      songBadges.appendChild(newBadge);
+    }
   }
 
   handlePickDifficulty(difficulty: Difficulty): void {
@@ -136,8 +223,6 @@ class Game implements GameInterface {
       const nameHeader = document.createElement("header");
       nameHeader.classList.add("start__vocaloid-name");
       nameHeader.textContent = vocaloid.name;
-
-      console.log("handleCreateVocaloid");
 
       const descP = document.createElement("p");
       descP.classList.add("start__vocaloid-desc");
@@ -276,6 +361,40 @@ class Game implements GameInterface {
     return songLi;
   };
 
+  handleShowMusicVideo = () => {
+    this.musicVideoTimeout = setTimeout((): void => {
+      const video: HTMLVideoElement | null = document.querySelector(
+        ".start__background-video"
+      );
+      const curSong = this.songsLoaded[this.curSongId];
+
+      if (!video) return;
+
+      video.src = curSong.musicVideo;
+
+      video.addEventListener("loadeddata", () => {
+        const durationInSeconds = video.duration;
+        const start = new Random().int(
+          (durationInSeconds * 1) / 3,
+          (durationInSeconds * 2) / 3
+        );
+
+        video.currentTime = start;
+
+        // const smoothVolTransition = ({ interval: number }): void => {};
+
+        if (!this.isGameMuted) {
+          video.volume = 0.2;
+          video.play();
+
+          this.musicVideoInterval = setInterval((): void => {
+            video.currentTime = start;
+          }, 12000);
+        }
+      });
+    }, 750);
+  };
+
   handleListScroll = (
     e: any,
     scrollAmount: number,
@@ -296,8 +415,6 @@ class Game implements GameInterface {
       this.curSongId
     ];
 
-    console.log(prevAudioElement);
-
     if (e.deltaY > 0) {
       if (this.curSongId === this.songsLoaded.length - 1) return;
 
@@ -313,7 +430,18 @@ class Game implements GameInterface {
       const curAuthors = document.querySelectorAll(".start__song-authors")[
         this.curSongId
       ];
-      curAuthors.classList.add("start__song-authors--slide-animation");
+
+      if (
+        curAuthors &&
+        curAuthors.textContent &&
+        curAuthors.textContent.length > 20
+      )
+        curAuthors.classList.add("start__song-authors--slide-animation");
+
+      clearTimeout(this.musicVideoTimeout as NodeJS.Timeout);
+      clearInterval(this.musicVideoInterval as NodeJS.Timer);
+      this.handleViewSong();
+      this.handleShowMusicVideo();
 
       songList?.scrollTo({
         top: songList.scrollTop + scrollAmount,
@@ -335,11 +463,21 @@ class Game implements GameInterface {
 
     prevAuthors.classList.remove("start__song-authors--slide-animation");
     prevAudioElement.classList.remove("start__song--selected");
-
+    clearTimeout(this.musicVideoTimeout as NodeJS.Timeout);
+    clearInterval(this.musicVideoInterval as NodeJS.Timer);
+    this.handleShowMusicVideo();
     const curAuthors = document.querySelectorAll(".start__song-authors")[
       this.curSongId
     ];
-    curAuthors.classList.add("start__song-authors--slide-animation");
+
+    if (
+      curAuthors &&
+      curAuthors.textContent &&
+      curAuthors.textContent.length > 20
+    )
+      curAuthors.classList.add("start__song-authors--slide-animation");
+
+    this.handleViewSong();
 
     songList?.scrollTo({
       top: songList.scrollTop - scrollAmount,
@@ -363,8 +501,12 @@ class Game implements GameInterface {
 
     this.curSongId = 0;
 
+    this.handleViewSong();
+
     const firstSong = document.querySelectorAll(".start__song")[this.curSongId];
     firstSong.classList.add("start__song--selected");
+
+    this.handleShowMusicVideo();
 
     if (this.songsLoaded.length > 1)
       songList?.addEventListener("wheel", this.handleListWheel);
@@ -393,8 +535,6 @@ class Game implements GameInterface {
     if (songList) songList.scrollTop = 0;
 
     if (vocaloid !== null) {
-      console.log(vocaloid);
-
       this.songsLoaded = [
         ...this.songs.filter((song) => song.authors.includes(vocaloid)),
       ];

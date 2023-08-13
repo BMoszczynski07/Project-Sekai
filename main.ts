@@ -6,14 +6,23 @@ import "./src/assets/Emu_pfp.png";
 import "./src/assets/favicon.ico";
 import "./src/assets/main-bg.jpg";
 import "./src/assets/po_pi_po_song.jpg";
+import "./src/assets/ghost_rule.mp4";
+import "./src/assets/ready_steady.mp4";
 import "./src/assets/ready_steady_song.jpg";
 import "./src/assets/ghost_rule_song.jpg";
 import "./src/assets/song-scroll.mp3";
 import "./src/assets/click.wav";
+import "./src/assets/po_pi_po.mp4";
 import songs from "./src/scripts/shared/songs";
 import Game from "./src/scripts/Game";
 import vocaloids from "./src/scripts/shared/vocaloids";
 import Difficulty from "./src/scripts/shared/Difficulty";
+import "./src/assets/miku.mp4";
+import "./src/assets/miku.jpg";
+import "./src/assets/remote_controller.mp4";
+import "./src/assets/remote_controller.jpg";
+import "./src/assets/sisters_mercy.mp4";
+import "./src/assets/sisters_mercy.jpg";
 
 const handleGameLoad = (): void => {
   const game: Game = new Game(songs, vocaloids);
