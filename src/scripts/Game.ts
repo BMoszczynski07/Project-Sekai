@@ -137,6 +137,8 @@ class Game implements GameInterface {
       nameHeader.classList.add("start__vocaloid-name");
       nameHeader.textContent = vocaloid.name;
 
+      console.log("handleCreateVocaloid");
+
       const descP = document.createElement("p");
       descP.classList.add("start__vocaloid-desc");
       if (vocaloid.desc) descP.textContent = vocaloid.desc;
@@ -294,8 +296,11 @@ class Game implements GameInterface {
       this.curSongId
     ];
 
+    console.log(prevAudioElement);
+
     if (e.deltaY > 0) {
-      if (this.curSongId === this.songs.length - 1) return;
+      if (this.curSongId === this.songsLoaded.length - 1) return;
+
       this.curSongId++;
 
       const curAudioElement =
@@ -360,8 +365,6 @@ class Game implements GameInterface {
 
     const firstSong = document.querySelectorAll(".start__song")[this.curSongId];
     firstSong.classList.add("start__song--selected");
-
-    console.log(this.songsLoaded);
 
     if (this.songsLoaded.length > 1)
       songList?.addEventListener("wheel", this.handleListWheel);
