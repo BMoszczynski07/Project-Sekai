@@ -474,8 +474,9 @@
     font-family: $i;
     font-weight: 500;
     letter-spacing: -0.25px;
-    background: #f00;
-    width: auto;
+    // background: #f00;
+    white-space: nowrap;
+    display: inline-block;
 
     &--slide-animation {
       transform: translateX(100%);
@@ -487,7 +488,6 @@
       // background: #0f0;
       width: 100px;
       overflow: hidden;
-      white-space: nowrap;
     }
   }
 
