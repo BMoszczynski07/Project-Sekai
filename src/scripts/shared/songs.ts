@@ -119,7 +119,14 @@ let songs: Song[] = [
     name: "Sister's mercy",
     img: "./assets/sisters_mercy.jpg",
     musicVideo: "./assets/sisters_mercy.mp4",
-    authors: ["Kagamine Rin", "Kagamine Len"],
+    authors: [
+      "Kagamine Rin",
+      "Kagamine Len",
+      "Kagamine Rin",
+      "Kagamine Len",
+      "Kagamine Rin",
+      "Kagamine Len",
+    ],
     info: [{ type: "Release Date", desc: "27/05/2016" }],
     lvl: {
       easy: 5,

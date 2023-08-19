@@ -362,36 +362,35 @@ class Game implements GameInterface {
   };
 
   handleShowMusicVideo = () => {
+    const video: HTMLVideoElement | null = document.querySelector(
+      ".start__background-video"
+    );
+
+    const curSong = this.songsLoaded[this.curSongId];
+
+    if (!video) return;
+
+    video.src = curSong.musicVideo;
+    video.style.display = "none";
+
     this.musicVideoTimeout = setTimeout((): void => {
-      const video: HTMLVideoElement | null = document.querySelector(
-        ".start__background-video"
+      const durationInSeconds = video.duration;
+      const start = new Random().int(
+        (durationInSeconds * 1) / 3,
+        (durationInSeconds * 2) / 3
       );
-      const curSong = this.songsLoaded[this.curSongId];
 
-      if (!video) return;
+      video.currentTime = start;
 
-      video.src = curSong.musicVideo;
+      if (!this.isGameMuted) {
+        video.volume = 0.2;
+        video.style.display = "block";
+        video.play();
 
-      video.addEventListener("loadeddata", () => {
-        const durationInSeconds = video.duration;
-        const start = new Random().int(
-          (durationInSeconds * 1) / 3,
-          (durationInSeconds * 2) / 3
-        );
-
-        video.currentTime = start;
-
-        // const smoothVolTransition = ({ interval: number }): void => {};
-
-        if (!this.isGameMuted) {
-          video.volume = 0.2;
-          video.play();
-
-          this.musicVideoInterval = setInterval((): void => {
-            video.currentTime = start;
-          }, 12000);
-        }
-      });
+        this.musicVideoInterval = setInterval(() => {
+          video.currentTime = start;
+        }, 12000);
+      }
     }, 750);
   };
 
@@ -414,6 +413,9 @@ class Game implements GameInterface {
     const prevAuthors = document.querySelectorAll(".start__song-authors")[
       this.curSongId
     ];
+
+    clearTimeout(this.musicVideoTimeout as NodeJS.Timeout);
+    clearInterval(this.musicVideoInterval as NodeJS.Timer);
 
     if (e.deltaY > 0) {
       if (this.curSongId === this.songsLoaded.length - 1) return;
@@ -438,8 +440,6 @@ class Game implements GameInterface {
       )
         curAuthors.classList.add("start__song-authors--slide-animation");
 
-      clearTimeout(this.musicVideoTimeout as NodeJS.Timeout);
-      clearInterval(this.musicVideoInterval as NodeJS.Timer);
       this.handleViewSong();
       this.handleShowMusicVideo();
 
@@ -463,8 +463,6 @@ class Game implements GameInterface {
 
     prevAuthors.classList.remove("start__song-authors--slide-animation");
     prevAudioElement.classList.remove("start__song--selected");
-    clearTimeout(this.musicVideoTimeout as NodeJS.Timeout);
-    clearInterval(this.musicVideoInterval as NodeJS.Timer);
     this.handleShowMusicVideo();
     const curAuthors = document.querySelectorAll(".start__song-authors")[
       this.curSongId
