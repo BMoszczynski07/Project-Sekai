@@ -301,6 +301,9 @@
     width: 150px;
     height: 230px;
     background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__tap-accuracy__btn {

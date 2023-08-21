@@ -1,0 +1,113 @@
+@import "./global.scss";
+
+.board {
+  perspective: 150px;
+  transform: scale(0.55);
+
+  &__lane {
+    &--mini {
+      width: 8px;
+      height: 100%;
+    }
+
+    border-right: 1px solid #000;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &:nth-child(2),
+    &:nth-child(4),
+    &:nth-child(6),
+    &:nth-child(8),
+    &:nth-child(10) {
+      border-right: 1px solid #1f1f1f;
+    }
+  }
+
+  &__fields {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    &::before {
+      top: 0;
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      bottom: 0;
+      transform: translateY(50%);
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: rgb(107, 10, 79);
+      background: linear-gradient(
+        180deg,
+        rgba(107, 10, 79, 0) 0%,
+        rgba(132, 11, 145, 0.37) 50%,
+        rgba(241, 13, 13, 0) 100%
+      );
+    }
+  }
+
+  &__lane-field {
+    &--mini {
+      height: 8px;
+      width: 8px;
+    }
+
+    border-right: 1px solid #1f1f1f;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  &__lanes {
+    &--mini {
+      height: 200px;
+    }
+
+    transform: rotateX(60deg);
+    transform-style: preserve-3d;
+
+    position: relative;
+
+    display: flex;
+
+    &::before {
+      left: 0;
+      transform: translateX(-50%);
+    }
+
+    &::after {
+      right: 0;
+      transform: translateX(50%);
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+
+      height: 100%;
+      width: 5px;
+      background: rgb(107, 10, 79);
+      background: linear-gradient(
+        90deg,
+        rgba(107, 10, 79, 0) 0%,
+        rgba(132, 11, 145, 0.37) 50%,
+        rgba(241, 13, 13, 0) 100%
+      );
+    }
+  }
+}

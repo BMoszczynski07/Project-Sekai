@@ -1,14 +1,7 @@
-import Song from "./shared/SongType";
+import Game from "./Game";
+import SongMethods from "./shared/SongMethods";
 
-interface SongMethods {
-  handleBoardGenerate(board: HTMLElement): void;
-
-  handleNotePressed(noteNum: number): void;
-}
-
-class SongBoard implements SongMethods {
-  constructor(public currentSong: Song) {}
-
+class SongBoard extends Game implements SongMethods {
   handleBoardGenerate = (board: HTMLElement): void => {
     console.log(board);
   };
