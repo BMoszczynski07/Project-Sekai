@@ -73,6 +73,10 @@ class Game implements GameInterface {
         icon.classList.add("fa-solid");
         icon.classList.add("fa-music");
         break;
+      case "Creator":
+        icon.classList.add("fa-regular");
+        icon.classList.add("fa-user");
+        break;
       default:
         icon.classList.add("unknown");
         break;
@@ -572,7 +576,7 @@ class Game implements GameInterface {
     muteBtn?.addEventListener("click", () => {
       this.isGameMuted = !this.isGameMuted;
 
-      if (mute) mute.style.opacity = this.isGameMuted ? "1" : "0";
+      if (mute) mute.style.display = this.isGameMuted ? "block" : "none";
     });
   };
 }

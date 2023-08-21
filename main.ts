@@ -23,6 +23,11 @@ import "./src/assets/remote_controller.mp4";
 import "./src/assets/remote_controller.jpg";
 import "./src/assets/sisters_mercy.mp4";
 import "./src/assets/sisters_mercy.jpg";
+import "./src/assets/cast_a_spell_pfp.jpg";
+import "./src/assets/cast_a_spell.mp4";
+import "./src/assets/theme_of_niccori.mp4";
+import "./src/assets/theme_of_niccori.png";
+import "./src/assets/vocaloid_pick.wav";
 
 const handleGameLoad = (): void => {
   const game: Game = new Game(songs, vocaloids);
@@ -41,6 +46,13 @@ const handleGameLoad = (): void => {
     vocaloid.addEventListener("click", () => {
       const vocaloidName: string | null =
         vocaloid?.getAttribute("data-vocaloid");
+
+      if (!game.isGameMuted) {
+        const vocaloidAudio = new Audio();
+        vocaloidAudio.src = "./assets/vocaloid_pick.wav";
+        vocaloidAudio.volume = 0.2;
+        vocaloidAudio.play();
+      }
 
       game.handleShowSongs(vocaloidName);
     });

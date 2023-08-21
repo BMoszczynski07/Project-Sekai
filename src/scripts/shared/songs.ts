@@ -119,14 +119,7 @@ let songs: Song[] = [
     name: "Sister's mercy",
     img: "./assets/sisters_mercy.jpg",
     musicVideo: "./assets/sisters_mercy.mp4",
-    authors: [
-      "Kagamine Rin",
-      "Kagamine Len",
-      "Kagamine Rin",
-      "Kagamine Len",
-      "Kagamine Rin",
-      "Kagamine Len",
-    ],
+    authors: ["Kagamine Rin", "Kagamine Len"],
     info: [{ type: "Release Date", desc: "27/05/2016" }],
     lvl: {
       easy: 5,
@@ -134,6 +127,57 @@ let songs: Song[] = [
       hard: 20,
       expert: 22,
       master: 29,
+    },
+    notes: [
+      {
+        note: "regular",
+        posY: 20,
+        range: [2, 4],
+      },
+    ],
+  },
+  {
+    name: "Cast a spell",
+    img: "./assets/cast_a_spell_pfp.jpg",
+    musicVideo: "./assets/cast_a_spell.mp4",
+    authors: ["Guchiry"],
+    info: [{ type: "Release Date", desc: "04/11/2022" }],
+    lvl: {
+      easy: 6,
+      normal: 20,
+      hard: 23,
+      expert: 27,
+      master: 33,
+    },
+    notes: [
+      {
+        note: "regular",
+        posY: 20,
+        range: [2, 4],
+      },
+    ],
+  },
+  {
+    name: "Theme of Niccori Survey Team",
+    img: "./assets/theme_of_niccori.png",
+    musicVideo: "./assets/theme_of_niccori.mp4",
+    authors: [
+      "Emu Otori",
+      "Hatsune Miku",
+      "Nene Kusanagi",
+      "Rui Kamishiro",
+      "Tsukasa Tenma",
+    ],
+    info: [
+      { type: "Release Date", desc: "20/01/2023" },
+      { type: "Creator", desc: "Jizasu-P" },
+    ],
+    lvl: {
+      easy: 7,
+      normal: 14,
+      hard: 20,
+      expert: 29,
+      master: 30,
     },
     notes: [
       {

@@ -1,0 +1,164 @@
+@import "./global.scss";
+
+.song-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000c1;
+  z-index: 3;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //   display: none;
+  //   opacity: 0;
+
+  &__container {
+    width: 60vw;
+    height: 75vh;
+    background: rgba(43, 43, 43, 0.938);
+    backdrop-filter: blur(3px);
+    border-radius: 5px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__close {
+    color: #d4d4d4;
+    position: absolute;
+    bottom: 20px;
+    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 15px;
+    font-family: $dm;
+    font-weight: 600;
+  }
+
+  &__song-img__overlay {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+
+  &__song-img {
+    width: 100%;
+  }
+
+  &__top-box {
+    display: flex;
+    // background: #f00;
+    position: relative;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__song-title {
+    font-size: 18px;
+    font-family: $dm;
+    margin: 0;
+    color: #b8b8b8;
+    letter-spacing: -0.2px;
+    font-weight: 600;
+  }
+
+  &__close-mark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 24px;
+    color: #c5c5c5;
+    transition: 0.1s;
+    cursor: pointer;
+
+    &:hover {
+      color: #d83a3a;
+    }
+  }
+
+  &__song-badges {
+    padding: 0;
+    list-style-type: none;
+    width: 300px;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    // background: #0f0;
+    max-height: 25px;
+    @include scroll(0);
+    gap: 4px;
+    // background: #0f0;
+    display: flex;
+    margin: 2px 0;
+  }
+
+  &__badge {
+    background: #363636;
+    display: flex;
+    gap: 4px;
+    font-size: 14px;
+    color: #656565;
+    padding: 4px 8px;
+    cursor: default;
+    border-radius: 4px;
+    font-family: $sf;
+    letter-spacing: 0.2px;
+  }
+
+  &__badge-title {
+    margin: 0;
+  }
+
+  &__song-authors {
+    margin: 0;
+    color: #757575;
+    font-family: $dm;
+    font-size: 12px;
+  }
+
+  &__board-box {
+    background: rgb(52, 52, 52);
+    display: flex;
+    padding: 8px 0;
+    height: 280px;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  &__board-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__board {
+    width: 150px;
+    height: 230px;
+    background: #000;
+  }
+
+  &__tap-accuracy__btn {
+    width: 150px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 0;
+    background: #000;
+    color: #b8b8b8;
+    font-family: $dm;
+    letter-spacing: -0.4px;
+    font-weight: 600;
+  }
+}
