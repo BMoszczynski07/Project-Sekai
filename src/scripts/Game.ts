@@ -8,8 +8,6 @@ class Game implements GameInterface {
   // globals
   isGameMuted = true;
 
-  gameSpeed = 10;
-
   songs: Song[];
   songsLoaded: Song[];
 

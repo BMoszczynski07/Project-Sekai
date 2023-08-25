@@ -1,7 +1,14 @@
 interface SongMethods {
-  handleBoardGenerate(board: HTMLElement): void;
-
-  handleNotePressed(noteNum: number): void;
+  /*
+    implementation for both cases
+  */
+  handleBoardMove(): void;
+  /*
+    implementation for tests
+  */
+  /*
+    implementation for regular board
+  */
 }
 
 export default SongMethods;
