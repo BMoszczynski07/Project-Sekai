@@ -1,5 +1,5 @@
 import Game from "./Game";
-import SongMethods from "./shared/SongMethods";
+import SongMethods from "./shared/SongBoardInterface";
 import Song from "./shared/SongType";
 import Vocaloid from "./shared/VocaloidType";
 
@@ -18,7 +18,7 @@ class SongBoard extends Game implements SongMethods {
 
     if (mode === "test") {
       // event listeners for test etc
-    } else {
+    } else if (mode === "normal") {
       // event listeners for normal etc
     }
 

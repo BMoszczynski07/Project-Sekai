@@ -23,14 +23,14 @@ type NoteSlide = {
 
 type NoteRegular = Omit<NoteSlide, "notes" | "posYEnd">;
 
-type Note = NoteRegular | NoteSlide;
+export type Note = NoteRegular | NoteSlide;
 
 type SongInfo = {
   type: string;
   desc: string | number;
 };
 
-type Song = {
+type RegularSong = {
   name: string;
   img: string;
   musicVideo: string;
@@ -45,5 +45,12 @@ type Song = {
   };
   notes: Note[];
 };
+
+type AccuracyTestTune = {
+  src: "./assets/accuracy_test.mp3";
+  notes: Note[];
+};
+
+type Song = RegularSong | AccuracyTestTune;
 
 export default Song;
