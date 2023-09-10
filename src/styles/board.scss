@@ -1,9 +1,10 @@
 @import "./global.scss";
 
-@keyframes accuracy-test-panel-slide {
+@keyframes panelMove {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(100%);
   }
@@ -139,21 +140,21 @@
 
   &__notes-panel {
     position: absolute;
-    bottom: 0;
+    bottom: 16px;
     left: 0;
     width: 100%;
-    height: 220px;
+    height: 125px;
     // background: #f00;
-
-    animation: accuracy-test-panel-slide 3s linear infinite;
   }
 
   &__note {
     position: absolute;
-    bottom: 190px;
-    left: 50%;
 
-    transform: translateX(-50%);
+    &--test {
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 100px;
+    }
 
     &--regular {
       width: 32px;

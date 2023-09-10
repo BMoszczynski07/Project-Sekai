@@ -1,28 +1,23 @@
-import { Note } from "./SongType";
-import SpeedSteps from "./SpeedSteps";
+// import { Note } from "./SongType";
+// import SpeedSteps from "./SpeedSteps";
 
 interface SongBoardInterface {
   /*
     implementation for both cases
   */
-  handleBoardMove(): void;
-
-  handleChangeGameSpeed(payload: SpeedSteps): void;
-
-  handleBoardGenerate(parent: HTMLElement): void;
-
+  // handleBoardMove(): void;
+  // handleChangeGameSpeed(payload: SpeedSteps): void;
+  // handleBoardGenerate(parentElement: HTMLElement): void;
+  // handleCalculateTapAccuracy(note: Note): number;
+  // handleNotePressed(note: Note): void;
   /*
     implementation for tests
   */
-  handleCalculateTapAccuracy(note: Note): number;
-
-  handleTestModeNotePressed(noteId: number): void;
-
-  /*
-    implementation for regular board
-  */
-
-  handleNormalModeNotePress(noteId: number): void;
+  // handleShowShortcuts(): void;
+  // handleExpandBoard(parentElement: HTMLElement): void;
+  // handleCloseBoard(parentElement: HTMLElement): void;
+  handleRhythmInit(): void;
+  handlePanelMove(): void;
 }
 
 export default SongBoardInterface;

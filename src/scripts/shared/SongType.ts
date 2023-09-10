@@ -30,7 +30,7 @@ type SongInfo = {
   desc: string | number;
 };
 
-type RegularSong = {
+type Song = {
   name: string;
   img: string;
   musicVideo: string;
@@ -45,12 +45,5 @@ type RegularSong = {
   };
   notes: Note[];
 };
-
-type AccuracyTestTune = {
-  src: "./assets/accuracy_test.mp3";
-  notes: Note[];
-};
-
-type Song = RegularSong | AccuracyTestTune;
 
 export default Song;

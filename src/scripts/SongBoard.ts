@@ -1,27 +1,52 @@
 import Game from "./Game";
-import SongMethods from "./shared/SongBoardInterface";
+import SongBoardInterface from "./shared/SongBoardInterface";
 import Song from "./shared/SongType";
 import Vocaloid from "./shared/VocaloidType";
 
-type BoardMode = "test" | "normal";
+class SongBoard extends Game implements SongBoardInterface {
+  gameVelocity = 10;
 
-class SongBoard extends Game implements SongMethods {
-  gameSpeed: number;
+  notes = 0;
+  notesInterval: NodeJS.Timer | null = null;
 
-  constructor(
-    songs: Song[],
-    vocaloids: Vocaloid[],
-    public mode: BoardMode,
-    public speed: number
-  ) {
-    this.gameSpeed = speed;
+  boardInterval: NodeJS.Timer | null = null;
 
-    if (mode === "test") {
-      // event listeners for test etc
-    } else if (mode === "normal") {
-      // event listeners for normal etc
-    }
+  handleRhythmInit(): void {
+    const audioContext = new window.AudioContext();
 
+    this.notesInterval = setInterval(() => {
+      let freq;
+      let duration = 0.2;
+
+      if (this.notes < 3) {
+        freq = 220;
+        this.notes++;
+      } else {
+        freq = 320;
+        this.notes = 0;
+      }
+
+      const oscillator = audioContext.createOscillator();
+      oscillator.type = "triangle"; // Rodzaj fali dźwiękowej (np. sinusoidalna)
+      oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+
+      oscillator.connect(audioContext.destination);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + duration);
+    }, 500);
+  }
+
+  handlePanelMove(): void {
+    const boardPanel: HTMLElement | null = document.querySelector(
+      ".board__notes-panel"
+    );
+
+    if (!boardPanel) return;
+
+    boardPanel.style.animation = "panelMove 2s linear infinite";
+  }
+
+  constructor(songs: Song[], vocaloids: Vocaloid[]) {
     super(songs, vocaloids);
   }
 }

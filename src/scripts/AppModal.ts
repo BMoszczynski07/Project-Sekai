@@ -1,15 +1,19 @@
 import Game from "./Game";
 
 interface ModalInterface {
-  handleModalOpen(): void;
+  handleModalOpen(modal: HTMLElement): void;
 
-  handleModalClose(): void;
+  handleModalClose(modal: HTMLElement): void;
 }
 
-class AppModal extends Game implements ModalInterface {
-  handleModalOpen(): void {}
+abstract class AppModal extends Game implements ModalInterface {
+  handleModalOpen(modal: HTMLElement): void {
+    modal.style.display = "block";
+  }
 
-  handleModalClose(): void {}
+  handleModalClose(modal: HTMLElement): void {
+    modal.style.display = "none";
+  }
 }
 
 export default AppModal;

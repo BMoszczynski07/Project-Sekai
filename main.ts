@@ -28,9 +28,15 @@ import "./src/assets/cast_a_spell.mp4";
 import "./src/assets/theme_of_niccori.mp4";
 import "./src/assets/theme_of_niccori.png";
 import "./src/assets/vocaloid_pick.wav";
+import SongBoard from "./src/scripts/SongBoard";
 
 const handleGameLoad = (): void => {
   const game: Game = new Game(songs, vocaloids);
+
+  const board: SongBoard = new SongBoard(songs, vocaloids);
+
+  board.handleRhythmInit();
+  board.handlePanelMove();
 
   game.handleShowSongs(null);
 
