@@ -18,6 +18,8 @@ interface SongBoardInterface {
   // handleCloseBoard(parentElement: HTMLElement): void;
   handleRhythmInit(): void;
   handlePanelMove(): void;
+  handleNoteDown(e: KeyboardEvent): void;
+  handleNoteUp(e: KeyboardEvent): void;
 }
 
 export default SongBoardInterface;

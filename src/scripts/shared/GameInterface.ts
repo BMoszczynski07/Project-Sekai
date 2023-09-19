@@ -3,6 +3,10 @@ import Song from "./SongType";
 import Vocaloid from "./VocaloidType";
 
 interface GameInterface {
+  handleInitializeVocaloidBtns(): void;
+
+  handleSetLvlBtns(): void;
+
   handleInitializeMuteOption(): void;
 
   handleCreateSong(song: Song, index: number): HTMLLIElement;

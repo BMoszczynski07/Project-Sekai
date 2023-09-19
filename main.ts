@@ -16,7 +16,6 @@ import "./src/assets/po_pi_po.mp4";
 import songs from "./src/scripts/shared/songs";
 import Game from "./src/scripts/Game";
 import vocaloids from "./src/scripts/shared/vocaloids";
-import Difficulty from "./src/scripts/shared/Difficulty";
 import "./src/assets/miku.mp4";
 import "./src/assets/miku.jpg";
 import "./src/assets/remote_controller.mp4";
@@ -31,71 +30,22 @@ import "./src/assets/vocaloid_pick.wav";
 import SongBoard from "./src/scripts/SongBoard";
 
 const handleGameLoad = (): void => {
-  const game: Game = new Game(songs, vocaloids);
+  const gameInstance: Game = new Game(songs, vocaloids);
 
   const board: SongBoard = new SongBoard(songs, vocaloids);
 
   board.handleRhythmInit();
   board.handlePanelMove();
 
-  game.handleShowSongs(null);
+  gameInstance.handleShowSongs(null);
 
   // mute option
 
-  game.handleInitializeMuteOption();
+  gameInstance.handleInitializeMuteOption();
+  gameInstance.handleShowVocaloids();
 
-  game.handleShowVocaloids();
-
-  const vocaloidsBtns = document.querySelectorAll(".start__vocaloid");
-
-  vocaloidsBtns.forEach((vocaloid) => {
-    vocaloid.addEventListener("click", () => {
-      const vocaloidName: string | null =
-        vocaloid?.getAttribute("data-vocaloid");
-
-      if (!game.isGameMuted) {
-        const vocaloidAudio = new Audio();
-        vocaloidAudio.src = "./assets/vocaloid_pick.wav";
-        vocaloidAudio.volume = 0.2;
-        vocaloidAudio.play();
-      }
-
-      game.handleShowSongs(vocaloidName);
-    });
-  });
-
-  const gameLvls = document.querySelectorAll(".start__lvl");
-
-  const bgGlow = document.querySelector(".start__bg-glow");
-  const chosenSongBg = document.querySelector(".start__chosen-song__bg");
-  const chosenGameLvl = document.querySelector(
-    `[data-difficulty=${game.chosenDifficulty}]`
-  );
-
-  bgGlow?.classList.add(`start__bg-glow--${game.chosenDifficulty}`);
-  chosenSongBg?.classList.add(
-    `start__chosen-song__bg--${game.chosenDifficulty}`
-  );
-  chosenGameLvl?.classList.add(`start__lvl--${game.chosenDifficulty}`);
-
-  gameLvls.forEach((gameLvl) => {
-    gameLvl.addEventListener("click", () => {
-      const gameLvlDifficulty: Difficulty = gameLvl.getAttribute(
-        "data-difficulty"
-      ) as Difficulty;
-
-      if (gameLvlDifficulty === game.chosenDifficulty) return;
-
-      if (!game.isGameMuted) {
-        const clickAudio = new Audio();
-        clickAudio.src = "./assets/click.wav";
-
-        clickAudio.play();
-      }
-
-      game.handlePickDifficulty(gameLvlDifficulty);
-    });
-  });
+  gameInstance.handleInitializeVocaloidBtns();
+  gameInstance.handleSetLvlBtns();
 };
 
 document.addEventListener("DOMContentLoaded", handleGameLoad);

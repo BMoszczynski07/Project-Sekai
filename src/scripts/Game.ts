@@ -30,6 +30,61 @@ class Game implements GameInterface {
     this.songChosen = songs[0];
   }
 
+  handleInitializeVocaloidBtns(): void {
+    const vocaloidsBtns = document.querySelectorAll(".start__vocaloid");
+
+    vocaloidsBtns.forEach((vocaloid) => {
+      vocaloid.addEventListener("click", () => {
+        const vocaloidName: string | null =
+          vocaloid?.getAttribute("data-vocaloid");
+
+        if (!this.isGameMuted) {
+          const vocaloidAudio = new Audio();
+          vocaloidAudio.src = "./assets/vocaloid_pick.wav";
+          vocaloidAudio.volume = 0.2;
+          vocaloidAudio.play();
+        }
+
+        this.handleShowSongs(vocaloidName);
+      });
+    });
+  }
+
+  handleSetLvlBtns(): void {
+    const gameLvls = document.querySelectorAll(".start__lvl");
+
+    const bgGlow = document.querySelector(".start__bg-glow");
+    const chosenSongBg = document.querySelector(".start__chosen-song__bg");
+    const chosenGameLvl = document.querySelector(
+      `[data-difficulty=${this.chosenDifficulty}]`
+    );
+
+    bgGlow?.classList.add(`start__bg-glow--${this.chosenDifficulty}`);
+    chosenSongBg?.classList.add(
+      `start__chosen-song__bg--${this.chosenDifficulty}`
+    );
+    chosenGameLvl?.classList.add(`start__lvl--${this.chosenDifficulty}`);
+
+    gameLvls.forEach((gameLvl) => {
+      gameLvl.addEventListener("click", () => {
+        const gameLvlDifficulty: Difficulty = gameLvl.getAttribute(
+          "data-difficulty"
+        ) as Difficulty;
+
+        if (gameLvlDifficulty === this.chosenDifficulty) return;
+
+        if (!this.isGameMuted) {
+          const clickAudio = new Audio();
+          clickAudio.src = "./assets/click.wav";
+
+          clickAudio.play();
+        }
+
+        this.handlePickDifficulty(gameLvlDifficulty);
+      });
+    });
+  }
+
   handleCreateIcon(type: string): HTMLLIElement {
     const icon = document.createElement("i") as HTMLLIElement;
 
@@ -484,8 +539,9 @@ class Game implements GameInterface {
     clearInterval(this.musicVideoInterval as NodeJS.Timer);
     this.handleShowMusicVideo();
 
-    if (this.songsLoaded.length > 1)
+    if (this.songsLoaded.length > 1) {
       songList?.addEventListener("wheel", this.handleListWheel);
+    }
   };
 
   handleShowSongs = (vocaloid: string | null): void => {
