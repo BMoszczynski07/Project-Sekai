@@ -20,6 +20,8 @@ interface SongBoardInterface {
   handlePanelMove(): void;
   handleNoteDown(e: KeyboardEvent): void;
   handleNoteUp(e: KeyboardEvent): void;
+  handleGetPanelPos(): number | void;
+  handleCalculateTapAccuracy(boardPos: number, note: number): number | void;
 }
 
 export default SongBoardInterface;

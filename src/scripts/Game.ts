@@ -11,8 +11,6 @@ class Game implements GameInterface {
   songs: Song[];
   songsLoaded: Song[];
 
-  songChosen: Song;
-
   chosenDifficulty: Difficulty = "normal";
 
   vocaloids: Vocaloid[];
@@ -27,7 +25,6 @@ class Game implements GameInterface {
     this.songs = songs;
     this.songsLoaded = songs;
     this.vocaloids = vocaloids;
-    this.songChosen = songs[0];
   }
 
   handleInitializeVocaloidBtns(): void {
