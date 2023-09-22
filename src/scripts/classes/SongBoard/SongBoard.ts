@@ -1,8 +1,8 @@
-import Game from "./Game";
-import SongBoardInterface from "./shared/SongBoardInterface";
-import Song from "./shared/SongType";
-import Vocaloid from "./shared/VocaloidType";
-import testRhythm from "./shared/testrhythm";
+import Game from "../MainPage/Game";
+import SongBoardInterface from "../../shared/interfaces/SongBoardInterface";
+import Song from "../../shared/types/SongType";
+import Vocaloid from "../../shared/types/VocaloidType";
+import testRhythm from "../../shared/data/testrhythm";
 
 class SongBoard extends Game implements SongBoardInterface {
   gameVelocity = 10;

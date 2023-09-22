@@ -1,6 +1,6 @@
-import Difficulty from "./Difficulty";
-import Song from "./SongType";
-import Vocaloid from "./VocaloidType";
+import Difficulty from "../types/Difficulty";
+import Song from "../types/SongType";
+import Vocaloid from "../types/VocaloidType";
 
 interface GameInterface {
   handleInitializeVocaloidBtns(): void;

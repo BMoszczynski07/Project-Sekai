@@ -13,9 +13,9 @@ import "./src/assets/ghost_rule_song.jpg";
 import "./src/assets/song-scroll.mp3";
 import "./src/assets/click.wav";
 import "./src/assets/po_pi_po.mp4";
-import songs from "./src/scripts/shared/songs";
-import Game from "./src/scripts/Game";
-import vocaloids from "./src/scripts/shared/vocaloids";
+import songs from "./src/scripts/shared/data/songs";
+import Game from "./src/scripts/classes/MainPage/Game";
+import vocaloids from "./src/scripts/shared/data/vocaloids";
 import "./src/assets/miku.mp4";
 import "./src/assets/miku.jpg";
 import "./src/assets/remote_controller.mp4";
@@ -27,7 +27,7 @@ import "./src/assets/cast_a_spell.mp4";
 import "./src/assets/theme_of_niccori.mp4";
 import "./src/assets/theme_of_niccori.png";
 import "./src/assets/vocaloid_pick.wav";
-import SongBoard from "./src/scripts/SongBoard";
+import SongBoard from "./src/scripts/classes/SongBoard/SongBoard";
 
 const handleGameLoad = (): void => {
   const gameInstance: Game = new Game(songs, vocaloids);

@@ -1,4 +1,4 @@
-import Song from "./SongType";
+import Song from "../types/SongType";
 
 let songs: Song[] = [
   {

@@ -1,8 +1,8 @@
-import Random from "./Random";
-import Difficulty from "./shared/Difficulty";
-import GameInterface from "./shared/GameInterface";
-import Song from "./shared/SongType";
-import Vocaloid from "./shared/VocaloidType";
+import Random from "../Random/Random";
+import Difficulty from "../../shared/types/Difficulty";
+import GameInterface from "../../shared/interfaces/GameInterface";
+import Song from "../../shared/types/SongType";
+import Vocaloid from "../../shared/types/VocaloidType";
 
 class Game implements GameInterface {
   // globals

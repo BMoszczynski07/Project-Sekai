@@ -1,4 +1,4 @@
-import Game from "./Game";
+import Game from "../../classes/MainPage/Game";
 
 interface ModalInterface {
   handleModalOpen(modal: HTMLElement): void;

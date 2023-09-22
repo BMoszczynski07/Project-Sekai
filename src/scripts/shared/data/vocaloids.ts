@@ -1,4 +1,4 @@
-import Vocaloid from "./VocaloidType";
+import Vocaloid from "../types/VocaloidType";
 
 const vocaloids: Vocaloid[] = [
   {
