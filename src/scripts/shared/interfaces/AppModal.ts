@@ -1,12 +1,10 @@
-import Game from "../../classes/MainPage/Game";
-
 interface ModalInterface {
   handleModalOpen(modal: HTMLElement): void;
 
   handleModalClose(modal: HTMLElement): void;
 }
 
-abstract class AppModal extends Game implements ModalInterface {
+abstract class AppModal implements ModalInterface {
   handleModalOpen(modal: HTMLElement): void {
     modal.style.display = "block";
   }

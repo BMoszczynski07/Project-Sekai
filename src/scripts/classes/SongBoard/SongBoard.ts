@@ -1,79 +1,36 @@
-import Game from "../MainPage/Game";
 import SongBoardInterface from "../../shared/interfaces/SongBoardInterface";
 import Song from "../../shared/types/SongType";
 import Vocaloid from "../../shared/types/VocaloidType";
 import testRhythm from "../../shared/data/testrhythm";
+import BoardContainer from "./BoardContainer";
 
-class SongBoard extends Game implements SongBoardInterface {
-  gameVelocity = 10;
-
-  chosenSong: Song | undefined;
-
-  notes = 0;
-  notesInterval: NodeJS.Timer | null = null;
-
-  boardInterval: NodeJS.Timer | null = null;
-
-  private correspondingNotes: { [key: string]: number } = {
-    q: 0,
-    w: 1,
-    e: 2,
-    r: 3,
-    t: 4,
-    y: 5,
-    u: 6,
-    i: 7,
-    o: 8,
-    p: 9,
-    "[": 10,
-    "]": 11,
-  };
-
-  handleGetPanelPos(): number | void {
-    const panel: HTMLElement | null = document.querySelector(
-      ".board__notes-panel"
-    );
-
-    if (!panel) return;
-
-    const getPos = window
-      .getComputedStyle(panel)
-      .getPropertyValue("transform")
-      .split(",")[5]
-      .trim();
-
-    return parseFloat(getPos);
-  }
+class SongBoard extends BoardContainer implements SongBoardInterface {
+  public chosenSong: Song;
 
   handleCalculateTapAccuracy(boardPos: number, noteId: number): number | void {
-    // let findNote: Note;
     let accuracy: number;
 
-    if (!this.chosenSong) {
-      if (testRhythm.range[0] > noteId || testRhythm.range[1] < noteId) return;
+    if (testRhythm.range[0] > noteId || testRhythm.range[1] < noteId) return;
 
-      accuracy = testRhythm.posY - boardPos + 16;
-      accuracy = parseFloat(accuracy.toFixed(1));
+    accuracy = testRhythm.posY - boardPos + 16;
+    accuracy = parseFloat(accuracy.toFixed(1));
 
-      const board = document.querySelector(".board__lanes");
+    const board = document.querySelector(".board__lanes");
 
-      if (!board) return;
+    if (!board) return;
 
-      const accuracyElem = document.createElement("div");
-      accuracyElem.classList.add("board__accuracy");
+    const accuracyElem = document.createElement("div");
+    accuracyElem.classList.add("board__accuracy");
 
-      const accuracyVal = document.createElement("h5");
-      accuracyVal.classList.add("board__accuracy-val");
+    const accuracyVal = document.createElement("h5");
+    accuracyVal.classList.add("board__accuracy-val");
 
-      accuracyElem.appendChild(accuracyVal);
-      board.appendChild(accuracyElem);
+    accuracyElem.appendChild(accuracyVal);
+    board.appendChild(accuracyElem);
 
-      accuracyVal.textContent = accuracy.toString();
+    accuracyVal.textContent = accuracy.toString();
 
-      accuracyElem.style.bottom = `${116 - boardPos}px`;
-    } else {
-      accuracy = 1;
-    }
+    accuracyElem.style.bottom = `${116 - boardPos}px`;
 
     return accuracy;
   }
@@ -112,52 +69,14 @@ class SongBoard extends Game implements SongBoardInterface {
     // if not test...
   }
 
-  handleRhythmInit(): void {
-    const audioContext = new window.AudioContext();
-    this.notesInterval = setInterval(() => {
-      let freq;
-      let duration = 0.2;
-      if (this.notes < 3) {
-        freq = 220;
-        this.notes++;
-      } else {
-        freq = 320;
-        this.notes = 0;
-      }
-
-      const oscillator = audioContext.createOscillator();
-      oscillator.type = "triangle"; // Rodzaj fali dźwiękowej (np. sinusoidalna)
-      oscillator.connect(audioContext.destination);
-      oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
-      oscillator.start();
-      oscillator.stop(audioContext.currentTime + duration);
-    }, 500);
-  }
-
-  handlePanelMove(): void {
-    // const boardPanel: HTMLElement | null = document.querySelector(
-    //   ".board__notes-panel"
-    // );
-    // if (!boardPanel) return;
-    // boardPanel.style.animation = "";
-  }
-
-  constructor(songs: Song[], vocaloids: Vocaloid[], chosenSong: Song | void) {
+  constructor(songs: Song[], vocaloids: Vocaloid[], chosenSong: Song) {
     super(songs, vocaloids);
 
-    if (chosenSong) this.chosenSong = chosenSong;
+    this.chosenSong = chosenSong;
 
     // handleGenerateBoard
     // handleCalibrateSpeed
     // handleChangeSpeed
-
-    document.addEventListener("keydown", (e: KeyboardEvent) => {
-      this.handleNoteDown(e);
-    });
-
-    document.addEventListener("keyup", (e: KeyboardEvent) => {
-      this.handleNoteUp(e);
-    });
   }
 }
 

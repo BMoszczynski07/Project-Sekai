@@ -9,11 +9,11 @@ class Game implements GameInterface {
   isGameMuted = true;
 
   songs: Song[];
+  vocaloids: Vocaloid[];
+
   songsLoaded: Song[];
 
   chosenDifficulty: Difficulty = "normal";
-
-  vocaloids: Vocaloid[];
 
   scroll = 0;
   curSongId = 0;
