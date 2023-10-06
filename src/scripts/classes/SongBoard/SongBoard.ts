@@ -1,39 +1,9 @@
-import SongBoardInterface from "../../shared/interfaces/SongBoardInterface";
 import Song from "../../shared/types/SongType";
 import Vocaloid from "../../shared/types/VocaloidType";
-import testRhythm from "../../shared/data/testrhythm";
 import BoardContainer from "./BoardContainer";
 
-class SongBoard extends BoardContainer implements SongBoardInterface {
+class SongBoard extends BoardContainer {
   public chosenSong: Song;
-
-  handleCalculateTapAccuracy(boardPos: number, noteId: number): number | void {
-    let accuracy: number;
-
-    if (testRhythm.range[0] > noteId || testRhythm.range[1] < noteId) return;
-
-    accuracy = testRhythm.posY - boardPos + 16;
-    accuracy = parseFloat(accuracy.toFixed(1));
-
-    const board = document.querySelector(".board__lanes");
-
-    if (!board) return;
-
-    const accuracyElem = document.createElement("div");
-    accuracyElem.classList.add("board__accuracy");
-
-    const accuracyVal = document.createElement("h5");
-    accuracyVal.classList.add("board__accuracy-val");
-
-    accuracyElem.appendChild(accuracyVal);
-    board.appendChild(accuracyElem);
-
-    accuracyVal.textContent = accuracy.toString();
-
-    accuracyElem.style.bottom = `${116 - boardPos}px`;
-
-    return accuracy;
-  }
 
   handleNoteDown(e: KeyboardEvent): void {
     const { key } = e;
@@ -61,10 +31,6 @@ class SongBoard extends BoardContainer implements SongBoardInterface {
     const boardPos = this.handleGetPanelPos();
 
     if (!boardPos) return;
-
-    let tapAccuracy = this.handleCalculateTapAccuracy(boardPos, noteId);
-
-    console.log(tapAccuracy);
 
     // if not test...
   }

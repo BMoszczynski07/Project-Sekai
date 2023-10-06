@@ -1,5 +1,16 @@
 @import "./global.scss";
 
+@keyframes boardResize {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
 .song-modal {
   position: fixed;
   top: 0;
@@ -307,6 +318,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
+
+    &--resized {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      animation: boardResize 0.2s linear forwards;
+    }
   }
 
   &__tap-accuracy__btn {

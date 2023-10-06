@@ -1,9 +1,7 @@
-import AppModal from "./shared/interfaces/AppModal";
-import SongModalInterface from "./shared/interfaces/SongModalInterface";
+import SongModalInterface from "../../shared/interfaces/SongModalInterface";
+import AppModal from "./AppModal";
 
 class SongModal extends AppModal implements SongModalInterface {
-  // handleCreateBadge(type: string, desc: string | number): HTMLElement {}
-
   handleUpdateSong(): void {}
 }
 

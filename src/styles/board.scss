@@ -10,41 +10,71 @@
   }
 }
 
+@keyframes accuracyElemDisappear {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+$boardBorderColor: rgb(107, 10, 79);
+
 .board {
   perspective: 150px;
 
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background: #1a1a1ad3;
+    display: none;
+
+    &::before {
+      content: "Tap anywhere to close";
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #dbdbdb;
+      font-size: 15px;
+      font-family: $dm;
+      font-weight: 500;
+      letter-spacing: -0.1px;
+    }
+
+    &--visible {
+      display: block;
+    }
+  }
+
+  // mini mode -> for testing purposes only
   &--mini {
     transform: scale(0.55);
   }
 
-  &__gradient {
-    position: absolute;
-    top: 0;
-    left: -5px;
-    width: calc(100% + 10px);
-    height: 60px;
-    z-index: 4;
-    background: linear-gradient(
-      0deg,
-      rgba(107, 10, 79, 0) 0%,
-      rgba(132, 11, 145, 0) 28%,
-      rgba(0, 0, 0, 1) 100%
-    );
-  }
-
+  // each lane styles
   &__lane {
+    // mini mode for tests
     &--mini {
       width: 8px;
       height: 100%;
     }
 
+    // I added this right border because otherwise the lanes woudl not cover 100% of the key's width which is 8px (+ 1px border for both right and left hand side).
     &:nth-child(1),
     &:nth-child(3),
     &:nth-child(5),
     &:nth-child(7),
     &:nth-child(9),
     &:nth-child(11) {
-      border-right: 1px solid transparent;
+      border-right: 1px solid #1f1f1f;
     }
 
     &:nth-child(2),
@@ -56,6 +86,7 @@
     }
   }
 
+  // span containing tap accuracy value container
   &__accuracy {
     position: absolute;
     border: 1px solid #fff;
@@ -67,6 +98,7 @@
     left: 34px;
   }
 
+  // value of tap's accuracy
   &__accuracy-val {
     position: absolute;
     top: calc(-100% - 2px);
@@ -82,29 +114,34 @@
   &__fields {
     display: flex;
     position: absolute;
+    //! 8px bottom from the board
     bottom: 8px;
     left: 0;
 
     background: rgba(107, 10, 80, 0.233);
 
-    &::before {
-      top: 0;
-      transform: translateY(-50%);
-    }
+    border-bottom: 1px solid $boardBorderColor;
+    border-top: 1px solid $boardBorderColor;
 
-    &::after {
-      bottom: 0;
-    }
+    // &::before {
+    //   top: 0;
+    //   transform: translateY(-50%);
+    // }
 
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      height: 0.9px;
-      width: 100%;
-      background: rgb(107, 10, 79);
-    }
+    // &::after {
+    //   bottom: 0;
+    // }
+
+    // &::before,
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   left: 0;
+    //   height: 0.9px;
+    //   width: 100%;
+    //   background: #f00;
+    //   z-index: 2;
+    // }
   }
 
   &__lane-field {
@@ -138,34 +175,17 @@
       rgba(107, 10, 79, 0.35) 100%
     );
 
-    // background: #f00;
-
     transform: rotateX(60deg);
     transform-style: preserve-3d;
+
+    // background: #f00;
 
     position: relative;
 
     display: flex;
 
-    &::before {
-      left: 0;
-      transform: translateX(-50%);
-    }
-
-    &::after {
-      right: 0;
-      transform: translateX(50%);
-    }
-
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      height: 100%;
-      width: 0.9px;
-      background: rgb(107, 10, 79);
-    }
+    border-left: 1px solid $boardBorderColor;
+    border-right: 1px solid $boardBorderColor;
   }
 
   &__notes-container {
@@ -186,9 +206,10 @@
 
     &--test {
       height: 100px;
+      // background: #f00;
     }
 
-    background: #0f0;
+    // background: #0f0;
   }
 
   &__note {
@@ -198,7 +219,7 @@
     &--test {
       left: 50%;
       transform: translateX(-50%);
-      bottom: 80px;
+      bottom: 88px;
     }
 
     &--regular {
@@ -216,8 +237,8 @@
       &::before {
         content: "";
         position: absolute;
-        width: 1.5px;
-        height: 1.5px;
+        width: 2px;
+        height: 2px;
         border-radius: 50%;
         background: #0e9b2c;
         transform: translateY(-50%);

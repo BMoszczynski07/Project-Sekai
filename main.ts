@@ -27,25 +27,32 @@ import "./src/assets/cast_a_spell.mp4";
 import "./src/assets/theme_of_niccori.mp4";
 import "./src/assets/theme_of_niccori.png";
 import "./src/assets/vocaloid_pick.wav";
-import SongBoard from "./src/scripts/classes/SongBoard/SongBoard";
+import TestRhythm from "./src/scripts/classes/SongBoard/TestRhythm";
 
 const handleGameLoad = (): void => {
-  const gameInstance: Game = new Game(songs, vocaloids);
+  const GameInstance: Game = new Game(songs, vocaloids);
 
-  const board: SongBoard = new SongBoard(songs, vocaloids);
+  const TestRhythmComponent = new TestRhythm(songs, vocaloids);
 
-  board.handleRhythmInit();
-  board.handlePanelMove();
+  if (TestRhythmComponent.testRhythm) {
+    TestRhythmComponent.handleGenerateBoard(
+      TestRhythmComponent.testRhythm,
+      "mini"
+    );
+  }
 
-  gameInstance.handleShowSongs(null);
+  TestRhythmComponent.initNotesListeners();
+  TestRhythmComponent.handleRhythmInit();
+
+  GameInstance.handleShowSongs(null);
 
   // mute option
 
-  gameInstance.handleInitializeMuteOption();
-  gameInstance.handleShowVocaloids();
+  GameInstance.handleInitializeMuteOption();
+  GameInstance.handleShowVocaloids();
 
-  gameInstance.handleInitializeVocaloidBtns();
-  gameInstance.handleSetLvlBtns();
+  GameInstance.handleInitializeVocaloidBtns();
+  GameInstance.handleSetLvlBtns();
 };
 
 document.addEventListener("DOMContentLoaded", handleGameLoad);

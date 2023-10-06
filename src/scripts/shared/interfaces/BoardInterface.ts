@@ -1,9 +1,10 @@
-import CorrespondingNotes from "../types/CorrespondingNotes";
-
 interface BoardInterface {
-  correspondingNotes: CorrespondingNotes<number>;
-
   handleGetPanelPos(): number | void;
+
+  handleNotesListen(
+    keyDown: (e: KeyboardEvent) => void,
+    keyUp: (e: KeyboardEvent) => void
+  ): void;
 }
 
 export default BoardInterface;
